@@ -12,10 +12,8 @@ use yii\grid\GridView;
 $this->title = 'Xodimlar';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= \common\widgets\Alert::widget()?>
 <div class="worker-index">
-
-   
-
   <!--   <p>
         <?= Html::a('Xodim Qo\'shish', ['create'], ['class' => 'btn btn-success']) ?>
     </p> -->

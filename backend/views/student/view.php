@@ -10,10 +10,8 @@ $this->title = "Talaba haqida axborot";
 \yii\web\YiiAsset::register($this);
 
 ?>
+<?= \common\widgets\Alert::widget()?>
 <div class="student-view">
-
-  
-
   <p>
     <?= Html::a('Tahrirlash', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     <?= Html::a('O\'chirish', ['delete', 'id' => $model->id], [
@@ -44,7 +42,10 @@ $this->title = "Talaba haqida axborot";
               <ul class="list-group list-group-unbordered mb-3">
                 <li class="list-group-item">
                   <b>Guruhi</b> <a class="float-right">
-
+                        <?php foreach($model->studentGroups as $student):?>
+                            <?= $student->group->name; ?>
+                            &nbsp;
+                        <?php endforeach;?>
                     </a>
                 </li>
                 <li class="list-group-item">
@@ -88,24 +89,8 @@ $this->title = "Talaba haqida axborot";
                         <td></td>                      
                         <td><span class="tag tag-success"><?=$model->qabul_sanasi?></span></td>
                       </tr>
-                      <tr>
-                        <td>Dars boshlanishi</td>
-                        <td></td>                      
-                        <td><span class="tag tag-success">
-                      <?php foreach($model->studentGroups as $student):?>
-                      <?=$student->leson_time; ?>
-                       <?php endforeach;?>
-                        </span></td>
-                      </tr>
-                      <tr>
-                        <td>Dars kunlari</td>
-                        <td></td>                      
-                         <td><span class="tag tag-success">
-                      <?php foreach($model->studentGroups as $student):?>
-                      <?=$student->lesson_days; ?>
-                       <?php endforeach;?>
-                        </span></td>
-                      </tr>
+
+
                       <tr>
                         <td>O'qitilish tili</td>
                         <td></td>                      
@@ -142,53 +127,32 @@ $this->title = "Talaba haqida axborot";
         <div class="row">
           <div class="col-12">
             <div class="card">
-             
-              <!-- /.card-header -->
-             
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
-                    <th>
-                      #
-                    </th>
-                    <th>
-<!--                      --><?php //foreach($model->studentGroups as $student):?>
-<!--                      --><?php //=$student->group->name; ?>
-<!--                       --><?php //endforeach;?>
-                    </th>
-                      <th>
-<!--                      --><?php //foreach($model->studentGroups as $student):?>
-<!--                      --><?php //=$student->group->name; ?>
-<!--                       --><?php //endforeach;?>
-                    </th>
-                   
+                    <th>Guruhi</th>
+                    <th>Dars kuni</th>
+                    <th>Dars vaqti</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                    <td>Dars vaqti</td>
-                    <td> 
-                      <?php foreach($model->studentGroups as $student):?>
-                      <?=$student->leson_time; ?>
-                       <?php endforeach;?>
-                       </td>
-                    <td> <?php foreach($model->studentGroups as $student):?>
-                      <?=$student->leson_time; ?>
-                       <?php endforeach;?></td>
-                    </td>                   
-                  </tr>
-                  <tr>
                     <td>
-                      Dars kuni
+                        <?php foreach($model->studentGroups as $student):?>
+                            <?=$student->group->name; ?>
+                        <br><br>
+                        <?php endforeach;?>
                     </td>
                     <td>
                        <?php foreach($model->studentGroups as $student):?>
                       <?=$student->lesson_days; ?>
+                       <br><br>
                        <?php endforeach;?>
                     </td>
                     <td>
                        <?php foreach($model->studentGroups as $student):?>
-                      <?=$student->lesson_days; ?>
+                      <?=$student->leson_time; ?>
+                       <br><br>
                        <?php endforeach;?>
                     </td>
                   </tr>
@@ -196,12 +160,10 @@ $this->title = "Talaba haqida axborot";
                   </tbody>              
                 </table>
             
-              <!-- /.card-body -->
+
             </div>
           </div>
-          <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
                 
               </div>

@@ -52,4 +52,6 @@ class Payments extends \yii\db\ActiveRecord
             'group' => 'Guruh',
         ];
     }
+
+
 }

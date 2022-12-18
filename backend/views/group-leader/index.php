@@ -7,14 +7,12 @@ use yii\helpers\ArrayHelper;
 use common\models\Group;
 use common\models\Worker;
 use common\models\GroupLeader;
-
+use common\widgets\Alert;
   $group = GroupLeader::find()->all();
 
   $this->title = "Ta'lim"
 ?>
-
-
- 
+<?= Alert::widget(); ?>
 
  <section class="content">
       <div class="container-fluid">
@@ -61,56 +59,10 @@ use common\models\GroupLeader;
          
           </div>
 
-          <!-- /.col -->
 
-       
-<div class="col-md-6">
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Guruh rahbarlari ro'yxati </h3>
-              </div>
-              <div class="card-body p-0">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>Guruh</th>
-                      <th></th>
-                      <th></th>
-                      <th>Guruh rahbari</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  <?php foreach ($mod as $key) :?>
-                    <tr>
-                      <td> 
-                     <?=$key['group_id']?>
-                     </td>
-                      <td>
-                      </td>
-                      <td></td>
-                      <td>
-                        <?=$key['worker_id']?>
-                      </td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>
-                          <?= Html::a('O\'chirish', ['delete', 'id' => $key->id], [
-      'class' => 'btn btn-danger',
-      'data' => [
-        'confirm' => 'Haqiqatdan ham ma\'lumotni o\'chirmoqchimisiz!',
-        'method' => 'post',
-      ],
-    ]) ?>
-                      </td>
-                    </tr>
-                     <?php endforeach; ?>
-                  </tbody>
-                    
-                </table>
-              </div>
-            </div>
-          </div>
+
+        <?php  require_once('view.php')?>
+
 
 
 

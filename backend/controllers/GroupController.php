@@ -41,6 +41,7 @@ public function actionIndex()
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $model->save(false);
+                Yii::$app->session->setFlash('success', 'Guruh muvaffaqiyatli yaratil!');
                 return $this->redirect(['index']);
             }
         } else {
@@ -56,6 +57,8 @@ public function actionIndex()
 public function actionDelete($id)
 {
     $this->findModel($id)->delete();
+
+    Yii::$app->session->setFlash('danger', 'Guruh muvaffaqiyatli o\'chirildi!');
 
     return $this->redirect(['index']);
 }

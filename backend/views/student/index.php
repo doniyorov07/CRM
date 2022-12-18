@@ -13,6 +13,7 @@ use common\models\Student;
 $this->title = 'Talabalar';
 
 ?>
+<?= \common\widgets\Alert::widget()?>
 <div class="student-index">
 
 <!-- 

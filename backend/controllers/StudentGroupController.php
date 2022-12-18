@@ -48,6 +48,7 @@ use Yii;
                          $model->lesson_days=implode(',',$model->lesson_days);
 
                         if($model->save())
+                            Yii::$app->session->setFlash('success', 'Talaba guruhga muvaffaqiyatli biriktirildi!');
                               return $this->redirect(['index']);
                 }
                $model->lesson_days=explode(',',$model->lesson_days);
@@ -61,7 +62,6 @@ use Yii;
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 

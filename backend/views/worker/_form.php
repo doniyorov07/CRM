@@ -10,7 +10,7 @@ use kartik\file\FileInput;
 /* @var $model common\models\Worker */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
+<?= \common\widgets\Alert::widget()?>
 <div class="worker-form">
 
     <section class="content">

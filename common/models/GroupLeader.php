@@ -49,7 +49,7 @@ class GroupLeader extends \yii\db\ActiveRecord
     }
 
     public function getGroup()
-    {   
+    {
         return $this->hasOne(Group::className(), ['id' => 'group_id']);
     }
 

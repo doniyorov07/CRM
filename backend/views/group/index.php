@@ -2,12 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use common\widgets\Alert;
 ;
 $this->title = "Guruhlar"
 ?>
 
-
+<?= Alert::widget() ?>
  
 
  <section class="content">

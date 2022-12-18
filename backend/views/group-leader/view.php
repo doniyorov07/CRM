@@ -1,7 +1,7 @@
 <?php
-
 use yii\helpers\Html;
-use common\models\GroupLeader;
+use yii\widgets\ActiveForm;
+
 ?>
 
 <div class="col-md-6">
@@ -20,35 +20,35 @@ use common\models\GroupLeader;
                     </tr>
                   </thead>
                   <tbody>
-                  <?php foreach ($mod as $key) :?>
                     <tr>
-                      <td> 
-                     
+                      <td>
+                          <?php //foreach($model->workerGroups as $worker):?>
+                              <?php // $worker->group->name; ?>
+                          <?php //endforeach;?>
                      </td>
                       <td>
-                      <?=$key['id']?>
                       </td>
                       <td></td>
                       <td>
-                       
+
                       </td>
                       <td></td>
                       <td></td>
                       <td></td>
                       <td>
-                          <?= Html::a('O\'chirish', ['delete', 'id' => $key->id], [
-      'class' => 'btn btn-danger',
-      'data' => [
+                          <?= Html::a('O\'chirish', ['delete', 'id' => $model->id], [
+    'class' => 'btn btn-danger',
+    'data' => [
         'confirm' => 'Haqiqatdan ham ma\'lumotni o\'chirmoqchimisiz!',
         'method' => 'post',
-      ],
-    ]) ?>
-                      </td>
-                    </tr>
-                     <?php endforeach; ?>
-                  </tbody>
-                    
-                </table>
-              </div>
-            </div>
-          </div>
+    ],
+]) ?>
+</td>
+</tr>
+
+</tbody>
+
+</table>
+</div>
+</div>
+</div>

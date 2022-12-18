@@ -2,10 +2,12 @@
 
 namespace backend\controllers;
 use common\models\GroupLeader;
+use common\models\Worker;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
+use Yii;
 class GroupLeaderController extends \yii\web\Controller
 {   
   public function behaviors()
@@ -35,9 +37,10 @@ class GroupLeaderController extends \yii\web\Controller
 public function actionIndex()
 {
         $model = new GroupLeader;
-        $mod = GroupLeader::find()->all();
+
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
+                Yii::$app->session->setFlash('success', 'Guruh rahbari muvaffaqiyatli biriktirildi!');
                 return $this->redirect(['index']);
             }
         } else {
@@ -46,22 +49,19 @@ public function actionIndex()
 
         return $this->render('index', [
             'model' => $model,
-            'mod' => $mod,
+
           
            
         ]);
 }
 
-public function actionView()
-{
-    $model = GroupLeader::find()->all();
-
-      return $this->render('index', [
+    public function actionView($id)
+    {
+        $model = GroupLeader::findOne($id);
+        return $this->render('view', [
             'model' => $model,
         ]);
-}
-
-
+    }
 public function actionDelete($id)
 {
     $this->findModel($id)->delete();

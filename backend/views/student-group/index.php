@@ -9,7 +9,8 @@
   use common\models\Student;
   use common\models\Group;
 
-  ?>  
+  ?>
+  <?= \common\widgets\Alert::widget()?>
   <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
   <div class="card-body">
     <div class="row">

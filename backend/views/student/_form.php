@@ -8,7 +8,7 @@ use kartik\date\DatePicker;
 use common\models\Group;
 use yii\helpers\ArrayHelper;
 ?>
-
+<?= \common\widgets\Alert::widget()?>
 <div class="student-form">
  
  <section class="content">

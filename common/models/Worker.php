@@ -83,5 +83,21 @@ class Worker extends \yii\db\ActiveRecord
        
     }
 
-   
+    public function getWorkerGroups()
+    {
+        return $this->hasMany(GroupLeader::className(), ['worker_id' => 'id']);
+    }
+
+    public function getStudentGroups()
+    {
+        return $this->hasMany(StudentGroup::className(), ['student_id' => 'id']);
+    }
+
+    public function getWorkerLeaders()
+    {
+        return $this->hasMany(GroupLeader::className(), ['group_id' =>'id']);
+    }
+
+
+
 }

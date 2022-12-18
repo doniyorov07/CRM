@@ -7,7 +7,7 @@ use common\models\StudentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use Yii;
 /**
  * StudentController implements the CRUD actions for Student model.
  */
@@ -83,8 +83,10 @@ class StudentController extends Controller
                          $model->oqitish_tili=implode(',',$model->oqitish_tili);
 
                         if($model->save())
+
+                            Yii::$app->session->setFlash('success', 'Talaba muvaffaqqiyatli qo\'shildi!');
+
                               return $this->redirect(['view', 'id' => $model->id]);
-                    \Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
                 }
                $model->oqitish_tili=explode(',',$model->oqitish_tili);
 
@@ -117,9 +119,9 @@ class StudentController extends Controller
 
                         if($model->save())
 
-                                return $this->redirect(['view', 'id' => $model->id]);
+                            Yii::$app->session->setFlash('success', 'Talaba ma\'lumotlari muvaffaqqiyatli o\'zgartirildi!');
 
-                    \Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                                return $this->redirect(['view', 'id' => $model->id]);
 
                 }
 
@@ -140,7 +142,7 @@ class StudentController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        Yii::$app->session->setFlash('success', 'Talaba  muvaffaqqiyatli o\'chirildi!');
         return $this->redirect(['index']);
     }
 

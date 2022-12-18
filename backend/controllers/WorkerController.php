@@ -7,6 +7,7 @@ use common\models\WorkerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * WorkerController implements the CRUD actions for Worker model.
@@ -79,6 +80,7 @@ class WorkerController extends Controller
                          $model->oqitish_tili=implode(',',$model->oqitish_tili);
                          $model->uploadImg();
                         if($model->save(false))
+                            Yii::$app->session->setFlash('success', 'Xodim muvaffaqiyatli qo\'shildi!');
                            return $this->redirect(['view', 'id' => $model->id]);
                 }
                $model->oqitish_tili=explode(',',$model->oqitish_tili);
@@ -86,20 +88,6 @@ class WorkerController extends Controller
            return $this->render('create', [
             'model' => $model,
         ]);
-
-        // if ($this->request->isPost) {
-        //     if ($model->load($this->request->post())) {
-        //         $model->uploadImg();
-        //         $model->save(false);
-        //         return $this->redirect(['view', 'id' => $model->id]);
-        //     }
-        // } else {
-        //     $model->loadDefaultValues();
-        // }
-
-        // return $this->render('create', [
-        //     'model' => $model,
-        // ]);
     }
 
     /**
@@ -124,7 +112,7 @@ class WorkerController extends Controller
                          $model->oqitish_tili=implode(',',$model->oqitish_tili);
                          $model->uploadImg($oldImage);
                         if($model->save(false))
-                          
+                            Yii::$app->session->setFlash('success', 'Xodim ma\'lumolari muvaffaqiyatli o\'zgartirildi!');
                          return $this->redirect(['view', 'id' => $model->id]);
 
                 }
@@ -134,21 +122,6 @@ class WorkerController extends Controller
                  return $this->render('update', [
             'model' => $model,
         ]);
-
-        // if ($this->request->isPost) {
-
-        //     if ($model->load($this->request->post())) {
-        //         $model->uploadImg($oldImage);
-        //         $model->save(false);
-        //         return $this->redirect(['view', 'id' => $model->id]);
-        //     }
-        // } else {
-        //     $model->loadDefaultValues();
-        // }
-
-        // return $this->render('update', [
-        //     'model' => $model,
-        // ]);
     }
 
     /**
@@ -161,7 +134,7 @@ class WorkerController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
+        Yii::$app->session->setFlash('success', 'Xodim muvaffaqiyatli o\'chirildi!');
         return $this->redirect(['index']);
     }
 

@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use common\models\Group;
+use common\models\StudentGroup;
 use Yii;
 use common\models\Payments;
 use common\models\PaymentsSearch;
@@ -39,15 +41,13 @@ class PaymentsController extends Controller
      */
     public function actionIndex()
     {
-        $model = new Payments();
-        $searchModel = new PaymentsSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $model = Group::find()->all();
+        $student = StudentGroup::find()->all();
+       return $this->render('index', [
+           'model' => $model,
+           'student' => $student,
+       ]);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'model' => $model,
-        ]);
     }
 
     /**

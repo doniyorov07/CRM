@@ -9,6 +9,7 @@ $this->title = 'Talaba Qo\'shish';
 $this->params['breadcrumbs'][] = ['label' => 'Ortga', 'url' => ['index']];
 
 ?>
+<?= \common\widgets\Alert::widget()?>
 <div class="student-create">
 
     <?= $this->render('_form', [
