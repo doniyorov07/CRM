@@ -36,7 +36,7 @@ class GroupLeaderController extends \yii\web\Controller
 
 public function actionIndex()
 {
-        $model = new GroupLeader;
+        $model = new GroupLeader();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -49,15 +49,13 @@ public function actionIndex()
 
         return $this->render('index', [
             'model' => $model,
-
-          
            
         ]);
 }
 
     public function actionView($id)
     {
-        $model = GroupLeader::findOne($id);
+        $model = GroupLeader::find()->all();
         return $this->render('view', [
             'model' => $model,
         ]);

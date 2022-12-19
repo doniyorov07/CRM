@@ -27,9 +27,26 @@ $this->title = "Guruhlar"
                   <div class="form-group">
                     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
                   </div>
+                    <div class="form-group">
+                        <?= $form->field($model, 'lesson_time')->textInput(['placeholder' => "12:00-13:00 ko'rinishida kiriting"]) ?>
+                    </div>
                   <div class="form-group">
                     <?= $form->field($model, 'course_amount')->textInput(['maxlength' => true]) ?>
                   </div>
+                    <div class="form-group">
+                        <?= $form->field($model, 'lesson_days')->checkboxList(
+                            [
+                                'Du' => 'Du',
+                                'Se' => 'Se',
+                                'Cho' => 'Cho',
+                                'Pa' => 'Pa',
+                                'Ju' => 'Ju',
+                                'Sha' => 'Sha',
+                                'Ya' => 'Ya',
+                            ]
+
+                        ) ?>
+                    </div>
                 </div>
                 <div class="card-footer">
               <?= Html::submitButton('Saqlash', ['class' => 'btn btn-success']) ?>
@@ -51,6 +68,9 @@ $this->title = "Guruhlar"
                     <tr>
                       <th>Guruh</th>
                       <th></th>
+                      <th>Dars kuni</th>
+                      <th></th>
+                      <th>Dars vaqti</th>
                       <th></th>
                       <th>Kurs narxi</th>
                     </tr>
@@ -60,13 +80,13 @@ $this->title = "Guruhlar"
                     <tr>                    
                       <td><?=$key['name'] ?></td>
                       <td></td>
+                      <td><?=$key['lesson_days']?></td>
+                      <td></td>
+                      <td><?=$key['lesson_time']?></td>
                       <td></td>
                       <td><?=$key['course_amount'] ?></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
                       <td>
-                          <?= Html::a('O\'chirish', ['delete', 'id' => $key->id], [
+                          <?= Html::a('<i class="fa fa-trash" aria-hidden="true"></i>', ['delete', 'id' => $key->id], [
       'class' => 'btn btn-danger',
       'data' => [
         'confirm' => 'Haqiqatdan ham ma\'lumotni o\'chirmoqchimisiz!',

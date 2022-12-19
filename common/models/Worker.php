@@ -93,10 +93,11 @@ class Worker extends \yii\db\ActiveRecord
         return $this->hasMany(StudentGroup::className(), ['student_id' => 'id']);
     }
 
-    public function getWorkerLeaders()
-    {
-        return $this->hasMany(GroupLeader::className(), ['group_id' =>'id']);
-    }
+
+
+
+
+
 
 
 

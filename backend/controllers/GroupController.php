@@ -38,15 +38,19 @@ public function actionIndex()
       $model = new Group();
       $group = Group::find()->all();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
-                $model->save(false);
-                Yii::$app->session->setFlash('success', 'Guruh muvaffaqiyatli yaratil!');
-                return $this->redirect(['index']);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
+    if(isset($_POST['Group']))
+    {
+        $model->attributes=$_POST['Group'];
+
+        if($model->lesson_days!=='')
+
+            $model->lesson_days=implode(',',$model->lesson_days);
+
+        if($model->save())
+            Yii::$app->session->setFlash('success', 'Guruh muvaffaqiyatli yaratildi!');
+        return $this->redirect(['index']);
+    }
+    $model->lesson_days=explode(',',$model->lesson_days);
 
         return $this->render('index', [
             'model' => $model,
@@ -58,7 +62,7 @@ public function actionDelete($id)
 {
     $this->findModel($id)->delete();
 
-    Yii::$app->session->setFlash('danger', 'Guruh muvaffaqiyatli o\'chirildi!');
+    Yii::$app->session->setFlash('success', 'Guruh muvaffaqiyatli o\'chirildi!');
 
     return $this->redirect(['index']);
 }

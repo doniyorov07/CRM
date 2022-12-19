@@ -94,15 +94,6 @@ $this->title = "Xodim haqida axborot";
               <td></td>                      
               <td><span class="tag tag-success"><?=$model->oqitish_tili?></span></td>
           </tr>
-           <tr>
-              <td>Xodim guruhlari</td>
-              <td></td>                      
-              <td><span class="tag tag-success">
-                <?php foreach($model->workerGroups as $worker):?>
-                <?= $worker->group->name ?>
-                <?php endforeach;?>
-              </span></td>
-          </tr>
           <tr>
               <td>Xodim holati</td>
               <td></td>                      
@@ -133,20 +124,20 @@ $this->title = "Xodim haqida axborot";
                         <tbody>
                         <tr>
                             <td><span class="tag tag-success">
-                            <?php foreach($model->studentGroups as $worker):?>
+                            <?php foreach($model->workerGroups as $worker):?>
                                 <?= $worker->group->name ?>
                                 <br><br>
                             <?php endforeach;?>
                           </span></td>
                             <td>
-                                <?php foreach($model->studentGroups as $worker):?>
-                                    <?= $worker->lesson_days ?>
+                                <?php foreach($model->workerGroups as $worker):?>
+                                    <?= $worker->group->lesson_days ?>
                                 <br><br>
                                 <?php endforeach;?>
                             </td>
                             <td>
-                                <?php foreach($model->studentGroups as $worker):?>
-                                <?= $worker->leson_time ?>
+                                <?php foreach($model->workerGroups as $worker):?>
+                                <?= $worker->group->lesson_time ?>
                                     <br><br>
                                 <?php endforeach;?>
                             </td>

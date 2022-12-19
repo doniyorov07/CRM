@@ -30,8 +30,11 @@ class Group extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['lesson_days'], 'safe'],
             [['created_at', 'updated_at', 'created_by', 'status', 'updated_by', 'course_amount'], 'integer'],
             [['name'], 'string', 'max' => 100],
+            [['lesson_time'], 'string', 'max' => 255],
+
         ];
     }
 
@@ -49,6 +52,8 @@ class Group extends \yii\db\ActiveRecord
             'status' => 'Holati',
             'updated_by' => 'Updated By',
             'course_amount' => 'Kurs narxi',
+            'lesson_days' => "Dars kunlari",
+            'lesson_time' => 'Dars vaqti',
         ];
     }
 
@@ -59,6 +64,7 @@ class Group extends \yii\db\ActiveRecord
         BlameableBehavior::class,
     ];
     }
+
 
 
 }

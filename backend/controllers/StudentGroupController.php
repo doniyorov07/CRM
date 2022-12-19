@@ -41,11 +41,11 @@ use Yii;
 
                 if(isset($_POST['StudentGroup']))
                 {
-                        $model->attributes=$_POST['StudentGroup'];
+                    $model->attributes=$_POST['StudentGroup'];
 
-                        if($model->lesson_days!=='')
+                    if($model->lesson_days!=='')
 
-                         $model->lesson_days=implode(',',$model->lesson_days);
+                        $model->lesson_days=implode(',',$model->lesson_days);
 
                         if($model->save())
                             Yii::$app->session->setFlash('success', 'Talaba guruhga muvaffaqiyatli biriktirildi!');

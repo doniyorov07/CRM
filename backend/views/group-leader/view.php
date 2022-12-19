@@ -1,7 +1,8 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
+
+/** @var common\models\GroupLeader $model */
 ?>
 
 <div class="col-md-6">
@@ -22,9 +23,9 @@ use yii\widgets\ActiveForm;
                   <tbody>
                     <tr>
                       <td>
-                          <?php //foreach($model->workerGroups as $worker):?>
-                              <?php // $worker->group->name; ?>
-                          <?php //endforeach;?>
+                         <?php foreach($model->workerLeaders as $worker):?>
+                              <?=  $worker->name; ?>
+                          <?php endforeach; ?>
                      </td>
                       <td>
                       </td>

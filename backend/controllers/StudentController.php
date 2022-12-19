@@ -122,7 +122,6 @@ class StudentController extends Controller
                             Yii::$app->session->setFlash('success', 'Talaba ma\'lumotlari muvaffaqqiyatli o\'zgartirildi!');
 
                                 return $this->redirect(['view', 'id' => $model->id]);
-
                 }
 
         $model->oqitish_tili=explode(',',$model->oqitish_tili);

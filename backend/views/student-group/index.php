@@ -42,6 +42,7 @@
       </div>
     </div>
   </div>
+
   <div class="row">
     <div class="col-md-6"> <div class="form-group">
      <?= $form->field($model, 'started_at')->widget(DatePicker::classname(), [
@@ -56,42 +57,13 @@
     ?>
   </div>
   </div>
- 
-  <div class="col-md-6">  <div class="form-group">
-      <?= $form->field($model, 'leson_time')->textInput(['placeholder' => "12:00-13:00 ko'rinishida kiriting"]) ?>
-    </div>
-  </div>
+      <div class="col-md-6">
+          <div class="form-group">
+              <?= $form->field($model, 'course_amount')->textInput(['placeholder' => "Talaba uchun chegirma bo'lishi mumkin"]) ?>
+          </div>
+      </div>
 
   </div>
-
-
-  <div class="row">
-
-   
-  <div class="col-md-6">
-  <div class="form-group">
-   <?= $form->field($model, 'course_amount')->textInput(['maxlength' => true]) ?>
-  </div>
-  </div>
-
-  <div class="form-group">
-    <?= $form->field($model, 'lesson_days')->checkboxList(
-      [
-        'Du' => 'Du',
-        'Se' => 'Se',
-        'Cho' => 'Cho',
-        'Pa' => 'Pa',
-        'Ju' => 'Ju',
-        'Sha' => 'Sha',
-        'Ya' => 'Ya',
-      ]
-
-    ) ?>
-  </div>
-
-
-  </div>
-
   <div class="form-group">
     <?= Html::submitButton('Biriktirish', ['class' => 'btn btn-success']) ?>
   </div>

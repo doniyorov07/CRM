@@ -75,7 +75,7 @@ class Student extends \yii\db\ActiveRecord
     {
     return [
         TimestampBehavior::class,
-        ];
+           ];
     }
 
     public function getStudentGroups()

@@ -48,16 +48,24 @@ class GroupLeader extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getGroup()
+
+    public function getWorkerLeaders()
     {
-        return $this->hasOne(Group::className(), ['id' => 'group_id']);
+        return $this->hasMany(GroupLeader::className(), ['worker_id' => 'id']);
     }
 
     public function getWorker()
     {
         return $this->hasOne(Worker::className(), ['id' => 'worker_id']);
     }
- 
 
-   
+    public function getGroup()
+    {
+        return $this->hasOne(Group::className(), ['id' => 'group_id']);
+    }
+
+
+
+
+
 }
