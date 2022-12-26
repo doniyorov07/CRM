@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Student;
 use common\models\StudentSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -18,19 +19,31 @@ class StudentController extends Controller
      */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'except' => ['error'],
+                'rules' => [
+                    [
+                        'actions' => ['login', 'error', 'index', 'delete', 'update', 'view', 'create', 'search'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'actions' => ['logout', 'index', 'delete', 'update', 'view', 'create', 'search'],
+                        'allow' => true,
+                        'roles' => ['superadmin'],
                     ],
                 ],
-            ]
-        );
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
     }
-
     /**
      * Lists all Student models.
      *
@@ -70,26 +83,17 @@ class StudentController extends Controller
      */
     public function actionCreate()
     {
-
-       
            $model = new Student();
-
                 if(isset($_POST['Student']))
                 {
                         $model->attributes=$_POST['Student'];
-
                         if($model->oqitish_tili!=='')
-
                          $model->oqitish_tili=implode(',',$model->oqitish_tili);
-
                         if($model->save())
-
                             Yii::$app->session->setFlash('success', 'Talaba muvaffaqqiyatli qo\'shildi!');
-
                               return $this->redirect(['view', 'id' => $model->id]);
                 }
                $model->oqitish_tili=explode(',',$model->oqitish_tili);
-
               return $this->render('create', [
             'model' => $model,
         ]);
@@ -106,26 +110,16 @@ class StudentController extends Controller
     public function actionUpdate($id)
     {
         $model =Student::findOne($id);
-
-
                 if(isset($_POST['Student']))
-
                 {
                         $model->attributes=$_POST['Student'];
-
                         if($model->oqitish_tili!=='')
-
                                 $model->oqitish_tili=implode(',',$model->oqitish_tili);
-
                         if($model->save())
-
                             Yii::$app->session->setFlash('success', 'Talaba ma\'lumotlari muvaffaqqiyatli o\'zgartirildi!');
-
                                 return $this->redirect(['view', 'id' => $model->id]);
                 }
-
         $model->oqitish_tili=explode(',',$model->oqitish_tili);
-
                  return $this->render('update', [
             'model' => $model,
         ]);

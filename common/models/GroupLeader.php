@@ -12,6 +12,8 @@ use Yii;
  * @property int|null $worker_id
  * @property string|null $group_name
  * @property string|null $wroker_name
+ * @property-read Worker $worker
+ * @property-read Group $group
  */
 class GroupLeader extends \yii\db\ActiveRecord
 {
@@ -49,11 +51,6 @@ class GroupLeader extends \yii\db\ActiveRecord
     }
 
 
-    public function getWorkerLeaders()
-    {
-        return $this->hasMany(GroupLeader::className(), ['worker_id' => 'id']);
-    }
-
     public function getWorker()
     {
         return $this->hasOne(Worker::className(), ['id' => 'worker_id']);
@@ -63,9 +60,4 @@ class GroupLeader extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Group::className(), ['id' => 'group_id']);
     }
-
-
-
-
-
 }

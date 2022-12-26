@@ -6,57 +6,51 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
 use common\models\StudentGroup;
-
+use yii\web\NotFoundHttpException;
 use Yii;
     class StudentGroupController extends \yii\web\Controller
-    {   
-      public function behaviors()
-      {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
+    {
+        public function behaviors()
+        {
+            return [
                 'access' => [
                     'class' => AccessControl::className(),
+                    'except' => ['error'],
                     'rules' => [
                         [
+                            'actions' => ['login', 'error', 'index', 'delete'],
                             'allow' => true,
-                            'roles' => ['@'],
+                            'roles' => ['admin'],
+                        ],
+                        [
+                            'actions' => ['logout', 'index', 'delete'],
+                            'allow' => true,
+                            'roles' => ['superadmin'],
                         ],
                     ],
                 ],
-            ]
-        );
-    }
-
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'logout' => ['post'],
+                    ],
+                ],
+            ];
+        }
     public function actionIndex()
-    {   
-
+    {
            $model = new StudentGroup();
-
-                if(isset($_POST['StudentGroup']))
-                {
-                    $model->attributes=$_POST['StudentGroup'];
-
-                    if($model->lesson_days!=='')
-
-                        $model->lesson_days=implode(',',$model->lesson_days);
-
-                        if($model->save())
-                            Yii::$app->session->setFlash('success', 'Talaba guruhga muvaffaqiyatli biriktirildi!');
-                              return $this->redirect(['index']);
-                }
-               $model->lesson_days=explode(',',$model->lesson_days);
-
+           if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                Yii::$app->session->setFlash('success', 'Talaba guruhga muvaffaqiyatli biriktirildi!');
+                return $this->redirect(['index']);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
              return $this->render('index', [
                      'model' => $model,
     ]);
-
     }
 
     public function actionDelete($id)
@@ -70,7 +64,6 @@ use Yii;
         if (($model = StudentGroup::findOne(['id' => $id])) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
     }
 

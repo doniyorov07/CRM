@@ -17,7 +17,7 @@
       <div class="col-md-6">
         <div class="form-group">
          <?= $form->field($model, 'student_id')->widget(Select2::classname(), [
-          'data' => ArrayHelper::map(Student::find()->all(),'id','ism'),
+          'data' => ArrayHelper::map(Student::find()->all(),'id','ism', 'familiya'),
           'language' => 'de',
           'options' => ['placeholder' => 'Talabani tanlang ...'],
           'pluginOptions' => [

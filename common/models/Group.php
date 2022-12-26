@@ -1,9 +1,11 @@
 <?php
 
 namespace common\models;
+
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "group".
@@ -15,6 +17,8 @@ use Yii;
  * @property int|null $created_by
  * @property int|null $status
  * @property int|null $updated_by
+ *
+ * @property-read  StudentGroup $groupStudents
  */
 class Group extends \yii\db\ActiveRecord
 {
@@ -59,12 +63,30 @@ class Group extends \yii\db\ActiveRecord
 
     public function behaviors()
     {
-    return [
-        TimestampBehavior::class,
-        BlameableBehavior::class,
-    ];
+        return [
+            TimestampBehavior::class,
+            BlameableBehavior::class,
+        ];
     }
 
+    public function getGroup()
+    {
+        return $this->hasOne(Group::className(), ['id' => 'group_id']);
+    }
+
+    public function getStudent()
+    {
+        return $this->hasOne(Student::className(), ['id' => 'student_id']);
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getGroupStudents()
+    {
+
+        return $this->hasMany(StudentGroup::class, ['group_id' => 'id']);
+    }
 
 
 }

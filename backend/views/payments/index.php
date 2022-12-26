@@ -14,6 +14,7 @@ use common\models\Payments;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\StudentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var common\models\Payments[] $models */
 
 $this->title = 'To\'lovlar';
 
@@ -25,7 +26,7 @@ $this->title = 'To\'lovlar';
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                        <h3 class="card-title"> Barcha guruhlar ro'yxati </h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -40,12 +41,15 @@ $this->title = 'To\'lovlar';
                             <tbody>
                             <?php foreach ($model as $group):?>
                             <tr>
-
                                 <td>
-                                    <?= $group['name']?>
+                                    <?= $group->name ?>
                                 </td>
-                                <td><?=$group['course_amount']?></td>
-                                <th> Ko'rish</th>
+                                <td>
+                                   <?= $group->course_amount ?>
+                                </td>
+                                <th>  <?= Html::a('<i class="fa fa-eye" aria-hidden="true"></i>', ['view', 'id' => $group->id], [
+                                        'class' => 'btn btn-info',
+                                    ]) ?></th>
                             </tr>
                             <?php endforeach;?>
                             </tbody>

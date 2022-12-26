@@ -17,8 +17,8 @@ class PaymentsSearch extends Payments
     public function rules()
     {
         return [
-            [['id', 'discount', 'debt'], 'integer'],
-            [['name', 'date_of_lesson', 'month', 'group'], 'safe'],
+            [['id', 'payment_amount', 'debt'], 'integer'],
+            [['name', 'payment_date', 'month', 'group'], 'safe'],
         ];
     }
 
@@ -59,8 +59,8 @@ class PaymentsSearch extends Payments
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'date_of_lesson' => $this->date_of_lesson,
-            'discount' => $this->discount,
+            'payment_date' => $this->date_of_lesson,
+            'payment_amount' => $this->discount,
             'debt' => $this->debt,
         ]);
 

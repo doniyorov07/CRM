@@ -7,41 +7,46 @@ use common\models\WorkerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use Yii;
-
 /**
  * WorkerController implements the CRUD actions for Worker model.
  */
 class WorkerController extends Controller
 {
-    /**
-     * @inheritDoc
-     */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'except' => ['error'],
+                'rules' => [
+                    [
+                        'actions' => ['login', 'error', 'index', 'view'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'actions' => ['logout', 'index', 'create', 'update', 'view'],
+                        'allow' => true,
+                        'roles' => ['superadmin'],
                     ],
                 ],
-            ]
-        );
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
     }
 
-    /**
-     * Lists all Worker models.
-     *
-     * @return string
-     */
+
     public function actionIndex()
     {
         $searchModel = new WorkerSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -69,14 +74,11 @@ class WorkerController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Worker();  
-
+        $model = new Worker();
            if(isset($_POST['Worker']))
                 {
                         $model->attributes=$_POST['Worker'];
-
                         if($model->oqitish_tili!=='')
-
                          $model->oqitish_tili=implode(',',$model->oqitish_tili);
                          $model->uploadImg();
                         if($model->save(false))
@@ -84,7 +86,6 @@ class WorkerController extends Controller
                            return $this->redirect(['view', 'id' => $model->id]);
                 }
                $model->oqitish_tili=explode(',',$model->oqitish_tili);
-
            return $this->render('create', [
             'model' => $model,
         ]);
@@ -101,24 +102,17 @@ class WorkerController extends Controller
     {
        $model =Worker::findOne($id);
         $oldImage = $model->image;
-
            if(isset($_POST['Worker']))
-
                 {
                         $model->attributes=$_POST['Worker'];
-
                         if($model->oqitish_tili!=='')
-
                          $model->oqitish_tili=implode(',',$model->oqitish_tili);
                          $model->uploadImg($oldImage);
                         if($model->save(false))
                             Yii::$app->session->setFlash('success', 'Xodim ma\'lumolari muvaffaqiyatli o\'zgartirildi!');
                          return $this->redirect(['view', 'id' => $model->id]);
-
                 }
-
         $model->oqitish_tili=explode(',',$model->oqitish_tili);
-
                  return $this->render('update', [
             'model' => $model,
         ]);
@@ -150,7 +144,6 @@ class WorkerController extends Controller
         if (($model = Worker::findOne(['id' => $id])) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

@@ -8,31 +8,34 @@ use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\data\ActiveDataProvider;
 class GroupController extends \yii\web\Controller
-{   
-  public function behaviors()
-  {
-    return array_merge(
-        parent::behaviors(),
-        [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
+{
+    public function behaviors()
+    {
+        return [
             'access' => [
                 'class' => AccessControl::className(),
+                'except' => ['error'],
                 'rules' => [
                     [
+                        'actions' => ['login', 'error', 'index', 'delete'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'actions' => ['logout', 'index', 'delete'],
+                        'allow' => true,
+                        'roles' => ['superadmin'],
                     ],
                 ],
             ],
-        ]
-    );
-}
-
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
 public function actionIndex()
 {
       $model = new Group();
@@ -41,11 +44,8 @@ public function actionIndex()
     if(isset($_POST['Group']))
     {
         $model->attributes=$_POST['Group'];
-
         if($model->lesson_days!=='')
-
             $model->lesson_days=implode(',',$model->lesson_days);
-
         if($model->save())
             Yii::$app->session->setFlash('success', 'Guruh muvaffaqiyatli yaratildi!');
         return $this->redirect(['index']);
@@ -61,9 +61,7 @@ public function actionIndex()
 public function actionDelete($id)
 {
     $this->findModel($id)->delete();
-
     Yii::$app->session->setFlash('success', 'Guruh muvaffaqiyatli o\'chirildi!');
-
     return $this->redirect(['index']);
 }
 
@@ -72,7 +70,6 @@ protected function findModel($id)
     if (($model = Group::findOne(['id' => $id])) !== null) {
         return $model;
     }
-
     throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
 }
 

@@ -3,13 +3,16 @@
 namespace backend\controllers;
 
 use common\models\Group;
+use common\models\Student;
 use common\models\StudentGroup;
 use Yii;
 use common\models\Payments;
 use common\models\PaymentsSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * PaymentsController implements the CRUD actions for Payments model.
@@ -21,19 +24,31 @@ class PaymentsController extends Controller
      */
     public function behaviors()
     {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'except' => ['error'],
+                'rules' => [
+                    [
+                        'actions' => ['login', 'error', 'index', 'delete', 'payment', 'view', 'create', 'search'],
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                    [
+                        'actions' => ['logout', 'index', 'delete', 'payment', 'view', 'create', 'search'],
+                        'allow' => true,
+                        'roles' => ['superadmin'],
                     ],
                 ],
-            ]
-        );
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
     }
-
     /**
      * Lists all Payments models.
      *
@@ -42,10 +57,8 @@ class PaymentsController extends Controller
     public function actionIndex()
     {
         $model = Group::find()->all();
-        $student = StudentGroup::find()->all();
        return $this->render('index', [
            'model' => $model,
-           'student' => $student,
        ]);
 
     }
@@ -56,10 +69,14 @@ class PaymentsController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView(int $id)
     {
+        $model = Group::findOne($id);
+        if (!$model){
+            throw new NotFoundHttpException("Bunday guruh yo'q");
+        }
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -71,15 +88,15 @@ class PaymentsController extends Controller
     public function actionCreate()
     {
         $model = new Payments();
-
-        if ($this->request->isPost) {
+        Yii::$app->request->format = Response::FORMAT_JSON;
+        if (Yii::$app->request->isAjax) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
-        } else {
-            $model->loadDefaultValues();
+            return $this->renderAjax('payment', [
+                'model' => $model,
+            ]);
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -92,15 +109,23 @@ class PaymentsController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionPayment(int $id)
     {
-        $model = $this->findModel($id);
-
+        $models = Student::findOne($id);
+        if (!$models)
+        {
+            throw new NotFoundHttpException('Bunday talaba mavjud emas!');
+        }
+        $model = new Payments([
+            'group_id' => $models->id,
+            'student_id' => $models->id,
+        ]);
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('update', [
+        return $this->render('payment', [
+            'models' => $models,
             'model' => $model,
         ]);
     }
@@ -128,7 +153,7 @@ class PaymentsController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Payments::findOne(['id' => $id])) !== null) {
+        if (($model = Group::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
@@ -138,11 +163,9 @@ class PaymentsController extends Controller
     public function actionSearch()
     {
         $model = new \common\models\Group();
-
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
             $search = \common\models\Group::find()->where(['like', 'name', $model->name])->all();
-
                 return $this->render('search', [
                 'search' => $search,
                 'model' => $model,

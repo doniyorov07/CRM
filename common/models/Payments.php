@@ -31,8 +31,8 @@ class Payments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date_of_lesson'], 'safe'],
-            [['discount', 'debt'], 'integer'],
+            [['payment_date'], 'safe'],
+            [['payment_amount', 'debt', 'group_id', 'student_id', 'status'], 'integer'],
             [['name', 'month', 'group'], 'string', 'max' => 255],
         ];
     }
@@ -45,13 +45,12 @@ class Payments extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Talaba FISH',
-            'date_of_lesson' => 'Darsga kelgan sana',
-            'discount' => 'Kurs narxi',
+            'payment_date' => 'To\'lov sanasi',
+            'payment_amount' => 'Kurs narxi',
             'debt' => 'Qarz',
             'month' => 'Oy',
             'group' => 'Guruh',
         ];
     }
-
 
 }

@@ -1,55 +1,55 @@
 <?php
+
 use yii\helpers\Html;
 
 
-/** @var common\models\GroupLeader $model */
+/** @var common\models\GroupLeader[] $models */
 ?>
 
 <div class="col-md-6">
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Guruh rahbarlari ro'yxati </h3>
-              </div>
-              <div class="card-body p-0">
-                <table class="table">
-                  <thead>
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Guruh rahbarlari ro'yxati </h3>
+        </div>
+        <div class="card-body p-0">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Guruh</th>
+                    <th></th>
+                    <th></th>
+                    <th>Guruh rahbari</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($models as $model): ?>
                     <tr>
-                      <th>Guruh</th>
-                      <th></th>
-                      <th></th>
-                      <th>Guruh rahbari</th>
+                        <td>
+                            <?= $model->group ? $model->group->name : '' ?>
+                        </td>
+                        <td>
+                        </td>
+                        <td></td>
+                        <td>
+                            <?= $model->worker ? $model->worker->ismi : '' ?>
+                            <?= $model->worker ? $model->worker->familiya : '' ?>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <?= Html::a('<i class="fa fa-trash" aria-hidden="true"></i>', ['delete', 'id' => $model->id], [
+                                'class' => 'btn btn-danger',
+                                'data' => [
+                                    'confirm' => 'Haqiqatdan ham ma\'lumotni o\'chirmoqchimisiz!',
+                                    'method' => 'post',
+                                ],
+                            ]) ?>
+                        </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                         <?php foreach($model->workerLeaders as $worker):?>
-                              <?=  $worker->name; ?>
-                          <?php endforeach; ?>
-                     </td>
-                      <td>
-                      </td>
-                      <td></td>
-                      <td>
-
-                      </td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>
-                          <?= Html::a('O\'chirish', ['delete', 'id' => $model->id], [
-    'class' => 'btn btn-danger',
-    'data' => [
-        'confirm' => 'Haqiqatdan ham ma\'lumotni o\'chirmoqchimisiz!',
-        'method' => 'post',
-    ],
-]) ?>
-</td>
-</tr>
-
-</tbody>
-
-</table>
-</div>
-</div>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

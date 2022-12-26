@@ -14,6 +14,8 @@ use Yii;
  * @property string|null $started_at
  * @property string|null $finished_at
  * @property int|null $course_amount
+ *
+ * @property-read  Student $student
  */
 class StudentGroup extends \yii\db\ActiveRecord
 {
@@ -57,13 +59,18 @@ class StudentGroup extends \yii\db\ActiveRecord
     }
 
     public function getGroup()
-    {
+    {// model payments
         return $this->hasOne(Group::className(), ['id' => 'group_id']);
     }
 
     public function getStudent()
     {   
         return $this->hasOne(Student::className(), ['id' => 'student_id']);
+    }
+
+    public function getStudentGroups()
+    {
+        return $this->hasMany(StudentGroup::className(), ['group_id' => 'id']);
     }
 
    
