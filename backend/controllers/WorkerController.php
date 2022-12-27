@@ -27,7 +27,7 @@ class WorkerController extends Controller
                         'roles' => ['admin'],
                     ],
                     [
-                        'actions' => ['logout', 'index', 'create', 'update', 'view'],
+                        'actions' => ['logout', 'index', 'create', 'update', 'view', 'delete'],
                         'allow' => true,
                         'roles' => ['superadmin'],
                     ],

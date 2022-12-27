@@ -17,7 +17,7 @@ class PaymentsSearch extends Payments
     public function rules()
     {
         return [
-            [['id', 'payment_amount', 'debt'], 'integer'],
+            [['id', 'payment_amount', 'debt', 'group_id'], 'integer'],
             [['name', 'payment_date', 'month', 'group'], 'safe'],
         ];
     }

@@ -64,9 +64,9 @@ class GroupLeaderController extends \yii\web\Controller
 
     public function actionView()
     {
-        $models = GroupLeader::find()->all();
+        $model = GroupLeader::find()->all();
         return $this->render('view', [
-            'models' => $models,
+            'model' => $model,
         ]);
     }
 

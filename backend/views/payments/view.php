@@ -6,15 +6,9 @@ use yii\helpers\Html;
 use yii\bootstrap5\Modal;
 /** @var Group $model */
 /** @var StudentGroup[] $groupStudents */
-
+$this->title = "Talabalar ro'yxati";
 $groupStudents = $model->groupStudents;
-
 ?>
-<?php
-Modal::begin([
-'id' => 'myModal',
-'toggleButton' => ['label' => 'click me'],
-]);?>
 <section class="content">
 <div id="pay" class="container-fluid">
     <div class="row">
@@ -36,7 +30,6 @@ Modal::begin([
                         <tr>
                             <th>Gurux nomi</th>
                             <th>Kurs narxi</th>
-                            <th>To'lov holati</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -51,11 +44,8 @@ Modal::begin([
                                 <td>
                                     <?= $groupStudent->course_amount; ?>
                                 </td>
-                                <td>
-
-                                </td>
                                 <th>  <?= Html::a('To\'lash', ['payment', 'id' => $groupStudent->student_id], [
-                                        'class' => 'btn btn-info', 'id' => 'payments',
+                                        'class' => 'btn btn-info',
                                     ]) ?></th>
                             </tr>
                        <?php endforeach; ?>
@@ -71,7 +61,5 @@ Modal::begin([
 </div>
 <!-- /.container-fluid -->
 </section>
-<?php
-Modal::end();
-?>
+
 

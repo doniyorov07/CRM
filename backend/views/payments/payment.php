@@ -5,10 +5,11 @@ use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use kartik\date\DatePicker;
+use common\models\Group;
 /* @var $this yii\web\View */
 /* @var $model common\models\Payments */
 /* @var $form ActiveForm */
-
+$this->title = "Formani to'ldirishda e'tiborli bo'ling!";
 ?>
 
 <div class="update">
@@ -40,6 +41,17 @@ use kartik\date\DatePicker;
     </div>
     <div class="form-group">
         <?= $form->field($model, 'payment_amount')->textInput()?>
+    </div>
+    <div class="form-group">
+        <?= $form->field($model, 'group_id')->widget(Select2::classname(), [
+            'data' => ArrayHelper::map(Group::find()->all(),'id','name'),
+            'language' => 'de',
+            'options' => ['placeholder' => 'Talaba o\'qiydigan guruhni tanlang tanlang ...'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
+        ?>
     </div>
     <div class="form-group">
         <?= Html::submitButton('Saqlash', ['class' => 'btn btn-primary']) ?>

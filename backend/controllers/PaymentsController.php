@@ -88,15 +88,9 @@ class PaymentsController extends Controller
     public function actionCreate()
     {
         $model = new Payments();
-        Yii::$app->request->format = Response::FORMAT_JSON;
-        if (Yii::$app->request->isAjax) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
-            return $this->renderAjax('payment', [
-                'model' => $model,
-            ]);
-        }
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -117,19 +111,17 @@ class PaymentsController extends Controller
             throw new NotFoundHttpException('Bunday talaba mavjud emas!');
         }
         $model = new Payments([
-            'group_id' => $models->id,
             'student_id' => $models->id,
         ]);
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load($this->request->post()) && $model->save()) {
+            // Yii::$app->session->setFlash('success', 'To\'lov muvaffaqqiyatli amalga oshirildi!');
+            return $this->redirect(['index']);
         }
-
         return $this->render('payment', [
             'models' => $models,
             'model' => $model,
         ]);
     }
-
     /**
      * Deletes an existing Payments model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -140,7 +132,6 @@ class PaymentsController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
 
@@ -156,7 +147,6 @@ class PaymentsController extends Controller
         if (($model = Group::findOne(['id' => $id])) !== null) {
             return $model;
         }
-
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 

@@ -55,7 +55,6 @@ class GroupLeader extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Worker::className(), ['id' => 'worker_id']);
     }
-
     public function getGroup()
     {
         return $this->hasOne(Group::className(), ['id' => 'group_id']);

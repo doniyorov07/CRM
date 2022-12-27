@@ -2,6 +2,7 @@
 
 namespace common\models;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use Yii;
 
 /**
@@ -78,9 +79,17 @@ class Student extends \yii\db\ActiveRecord
            ];
     }
 
+    public function getGroup()
+    {
+        return $this->hasOne(Group::className(), ['id' => 'group_id']);
+    }
     public function getStudentGroups()
     {
         return $this->hasMany(StudentGroup::className(), ['student_id' => 'id']);
+    }
+    public function getPaymentGroups()
+    {
+        return $this->hasMany(Payments::className(), ['student_id' => 'id']);
     }
 
     

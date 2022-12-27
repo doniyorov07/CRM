@@ -46,11 +46,17 @@ class Payments extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Talaba FISH',
             'payment_date' => 'To\'lov sanasi',
-            'payment_amount' => 'Kurs narxi',
+            'payment_amount' => 'To\'lov summasi',
             'debt' => 'Qarz',
             'month' => 'Oy',
             'group' => 'Guruh',
+            'group_id' => 'Guruh nomi'
         ];
+    }
+
+    public function getGroup()
+    {
+        return $this->hasOne(Group::className(), ['id' => 'group_id']);
     }
 
 }
