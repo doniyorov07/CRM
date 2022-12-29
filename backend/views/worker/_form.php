@@ -6,6 +6,8 @@ use kartik\switchinput\SwitchInput;
 use kartik\select2\Select2;
 use kartik\date\DatePicker;
 use kartik\file\FileInput;
+use yii\helpers\ArrayHelper;
+use common\models\Position;
 /* @var $this yii\web\View */
 /* @var $model common\models\Worker */
 /* @var $form yii\widgets\ActiveForm */
@@ -73,7 +75,7 @@ use kartik\file\FileInput;
            <?= $form->field($model, 'tugilgan_yil')->widget(DatePicker::classname(), [
             'name' => 'check_issue_date', 
             'value' => date('yyyy-mm-dd'),
-            'options' => ['placeholder' => 'Darsga kelgan sanasi'],
+            'options' => ['placeholder' => 'Tug\'ilgan yili...'],
             'pluginOptions' => [
               'format' => 'yyyy-mm-dd',
               'todayHighlight' => true
@@ -82,19 +84,15 @@ use kartik\file\FileInput;
       ?>
   </div>
   <div class="form-group">
-
-  <?=  $form->field($model, 'lavozim')->widget(Select2::classname(), [
-
-    'hideSearch' => true,
-    'data' => [
-        "O'qituvchi" => 'O\'qituvchi',
-        "Admin" => 'Admin'],
-    'options' => ['placeholder' => 'Lavozimni tanlang'],
-    'pluginOptions' => [
-        'allowClear' => true
-    ]
-]); 
-?>
+      <?= $form->field($model, 'lavozim')->widget(Select2::classname(), [
+          'data' => ArrayHelper::map(Position::find()->all(), 'id', 'lavozim'),
+          'language' => 'uz',
+          'options' => ['placeholder' => 'Lavozimni tanlang ...'],
+          'pluginOptions' => [
+              'allowClear' => true
+          ],
+      ]);
+      ?>
 </div>
 
     <div class="form-group">
@@ -113,9 +111,7 @@ use kartik\file\FileInput;
     ]);
     ?>
 </div>
-
 <div class="form-group">
-
     <?= $form->field($model, 'shartnoma_muddati')->widget(DatePicker::classname(), [
         'name' => 'check_issue_date', 
         'value' => date('yyyy-mm-dd'),
@@ -134,12 +130,9 @@ use kartik\file\FileInput;
         'Ruscha' => 'Ruscha',
 
     ]
-
 ) ?>
 </div>
-
 <div class="form-group">
-
     <?= $form->field($model, 'status')->widget(SwitchInput::classname(), [
         'pluginOptions' => [
                 'size' => 'large',

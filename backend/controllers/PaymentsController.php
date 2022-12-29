@@ -49,6 +49,7 @@ class PaymentsController extends Controller
             ],
         ];
     }
+
     /**
      * Lists all Payments models.
      *
@@ -57,9 +58,9 @@ class PaymentsController extends Controller
     public function actionIndex()
     {
         $model = Group::find()->all();
-       return $this->render('index', [
-           'model' => $model,
-       ]);
+        return $this->render('index', [
+            'model' => $model,
+        ]);
 
     }
 
@@ -72,7 +73,7 @@ class PaymentsController extends Controller
     public function actionView(int $id)
     {
         $model = Group::findOne($id);
-        if (!$model){
+        if (!$model) {
             throw new NotFoundHttpException("Bunday guruh yo'q");
         }
         return $this->render('view', [
@@ -88,9 +89,9 @@ class PaymentsController extends Controller
     public function actionCreate()
     {
         $model = new Payments();
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
+        if ($model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
         return $this->render('create', [
             'model' => $model,
         ]);
@@ -103,18 +104,23 @@ class PaymentsController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionPayment(int $id)
+    public function actionPayment(int $id, int $group_id)
     {
         $models = Student::findOne($id);
-        if (!$models)
-        {
+        $group = Group::findOne($group_id);
+        if (!$models) {
             throw new NotFoundHttpException('Bunday talaba mavjud emas!');
         }
+        if (!$group) {
+            throw new NotFoundHttpException('Bunday guruh mavjud emas!');
+        }
+
         $model = new Payments([
             'student_id' => $models->id,
+            'group_id' => $group->id
         ]);
         if ($model->load($this->request->post()) && $model->save()) {
-            // Yii::$app->session->setFlash('success', 'To\'lov muvaffaqqiyatli amalga oshirildi!');
+            Yii::$app->session->setFlash('success', 'To\'lov muvaffaqqiyatli amalga oshirildi!');
             return $this->redirect(['index']);
         }
         return $this->render('payment', [
@@ -122,6 +128,7 @@ class PaymentsController extends Controller
             'model' => $model,
         ]);
     }
+
     /**
      * Deletes an existing Payments model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -129,7 +136,7 @@ class PaymentsController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
@@ -142,7 +149,7 @@ class PaymentsController extends Controller
      * @return Payments the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Group::findOne(['id' => $id])) !== null) {
             return $model;
@@ -155,11 +162,11 @@ class PaymentsController extends Controller
         $model = new \common\models\Group();
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
-            $search = \common\models\Group::find()->where(['like', 'name', $model->name])->all();
+                $search = \common\models\Group::find()->where(['like', 'name', $model->name])->all();
                 return $this->render('search', [
-                'search' => $search,
-                'model' => $model,
-            ]);
+                    'search' => $search,
+                    'model' => $model,
+                ]);
             }
         }
 

@@ -71,6 +71,10 @@ class StudentController extends Controller
     public function actionView($id)
     {   
          $model = Student::findOne($id);
+        if (!$model)
+        {
+            throw new NotFoundHttpException('Bunday talaba mavjud emas!');
+        }
         return $this->render('view', [
             'model' => $model,
         ]);
@@ -107,9 +111,13 @@ class StudentController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
         $model =Student::findOne($id);
+        if (!$model)
+        {
+            throw new NotFoundHttpException('Bunday talaba mavjud emas!');
+        }
                 if(isset($_POST['Student']))
                 {
                         $model->attributes=$_POST['Student'];
@@ -132,7 +140,7 @@ class StudentController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
         Yii::$app->session->setFlash('success', 'Talaba  muvaffaqqiyatli o\'chirildi!');
@@ -146,7 +154,7 @@ class StudentController extends Controller
      * @return Student the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Student::findOne(['id' => $id])) !== null) {
             return $model;

@@ -59,9 +59,13 @@ class WorkerController extends Controller
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView(int $id)
     {
          $model = Worker::findOne($id);
+        if (!$model)
+        {
+            throw new NotFoundHttpException('Bunday xodim mavjud emas!');
+        }
         return $this->render('view', [
             'model' => $model,
         ]);
@@ -98,9 +102,13 @@ class WorkerController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id)
     {
        $model =Worker::findOne($id);
+        if (!$model)
+        {
+            throw new NotFoundHttpException('Bunday xodim mavjud emas!');
+        }
         $oldImage = $model->image;
            if(isset($_POST['Worker']))
                 {
@@ -125,7 +133,7 @@ class WorkerController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
         Yii::$app->session->setFlash('success', 'Xodim muvaffaqiyatli o\'chirildi!');
@@ -139,7 +147,7 @@ class WorkerController extends Controller
      * @return Worker the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = Worker::findOne(['id' => $id])) !== null) {
             return $model;

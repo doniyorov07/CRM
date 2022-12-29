@@ -14,7 +14,7 @@ use common\models\Payments;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\StudentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/** @var common\models\Payments[] $models */
+/** @var common\models\Payments[] $model */
 
 $this->title = 'To\'lovlar';
 
@@ -27,10 +27,11 @@ $this->title = 'To\'lovlar';
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"> Barcha guruhlar ro'yxati </h3>
+                        <button onclick="ExportToExcel('xlsx')"><i class="fas fa-file-excel"></i></button>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example2" class="table table-bordered table-hover">
+                        <table id="example" class="table table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th>Gurux nomi</th>
@@ -64,3 +65,14 @@ $this->title = 'To\'lovlar';
     </div>
     <!-- /.container-fluid -->
 </section>
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script>
+    function ExportToExcel(type, fn, dl) {
+        var elt = document.getElementById('example');
+        var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+        return dl ?
+            XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+            XLSX.writeFile(wb, fn || ('table.' + (type || 'xlsx')));
+    }
+</script>
+

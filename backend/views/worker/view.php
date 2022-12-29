@@ -6,7 +6,6 @@ use common\widgets\Alert;
 /* @var $this yii\web\View */
 /* @var $model common\models\Worker */
 
-
 $this->params['breadcrumbs'][] = ['label' => 'Ortga', 'url' => ['index']];
 $this->title = "Xodim haqida axborot";
 \yii\web\YiiAsset::register($this);
@@ -99,7 +98,7 @@ $this->title = "Xodim haqida axborot";
               <td></td>                      
               <td><span class="tag tag-success">
                 <?php
-                if ($model->status ==1) {
+                if ($model->status == 1) {
                   echo '<i class="badge badge-success">Faol</i>';
               }
               else{
@@ -110,10 +109,7 @@ $this->title = "Xodim haqida axborot";
 </tbody>
 </table>
 </div>
-
 </div>
-
-
 <div class="tab-pane" id="timeline">
 
     <div class="card-body">
@@ -122,41 +118,28 @@ $this->title = "Xodim haqida axborot";
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
                         <tbody>
+                        <?php foreach($model->workerGroups as $worker):?>
                         <tr>
                             <td><span class="tag tag-success">
-                            <?php foreach($model->workerGroups as $worker):?>
-                                <?= $worker->group->name ?>
+                                <?= $worker->group ? $worker->group->name: '' ?>
                                 <br><br>
-                            <?php endforeach;?>
                           </span></td>
                             <td>
-                                <?php foreach($model->workerGroups as $worker):?>
-                                    <?= $worker->group->lesson_days ?>
+                                    <?= $worker->group ? $worker->group->lesson_days: '' ?>
                                 <br><br>
-                                <?php endforeach;?>
                             </td>
                             <td>
-                                <?php foreach($model->workerGroups as $worker):?>
-                                <?= $worker->group->lesson_time ?>
+                                <?= $worker->group ? $worker->group->lesson_time: '' ?>
                                     <br><br>
-                                <?php endforeach;?>
                             </td>
                         </tr>
+                        <?php endforeach;?>
                         </tbody>
-
                     </table>
                 </div>
-
             </div>
-
-
             <div class="tab-pane" id="timeline">
-
-
-
             </div>
-
-
             <div class="tab-pane" id="settings">
                 <form class="form-horizontal">
                     <div class="form-group row">
@@ -205,16 +188,9 @@ $this->title = "Xodim haqida axborot";
                     </div>
                 </form>
             </div>
-
-
-            <!-- /.tab-pane -->
         </div>
-        <!-- /.tab-content -->
     </div>
-
 </div>
-
-
 <div class="tab-pane" id="settings">
     <form class="form-horizontal">
       <div class="form-group row">

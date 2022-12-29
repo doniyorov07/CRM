@@ -53,13 +53,13 @@ use Yii;
     ]);
     }
 
-    public function actionDelete($id)
+    public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
 
-    protected function findModel($id)
+    protected function findModel(int $id)
     {
         if (($model = StudentGroup::findOne(['id' => $id])) !== null) {
             return $model;

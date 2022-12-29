@@ -21,6 +21,9 @@ use Yii;
  * @property string|null $oqitish_tili
  * @property string|null $yonalishi
  * @property int|null $status
+ *
+ * @property-read  StudentGroup $studentGroups
+ * @property-read  StudentGroup $paymentGroups
  */
 class Student extends \yii\db\ActiveRecord
 {
@@ -83,10 +86,18 @@ class Student extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Group::className(), ['id' => 'group_id']);
     }
+
+    /**
+     * @return ActiveQuery
+     */
     public function getStudentGroups()
     {
-        return $this->hasMany(StudentGroup::className(), ['student_id' => 'id']);
+        return $this->hasMany(StudentGroup::class, ['student_id' => 'id']);
     }
+
+    /**
+     * @return ActiveQuery
+     */
     public function getPaymentGroups()
     {
         return $this->hasMany(Payments::className(), ['student_id' => 'id']);

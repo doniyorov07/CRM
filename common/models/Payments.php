@@ -13,7 +13,8 @@ use Yii;
  * @property int|null $discount
  * @property int|null $debt
  * @property string|null $month
- * @property string|null $group
+ *
+ * @property-read Group $guruh
  */
 class Payments extends \yii\db\ActiveRecord
 {
@@ -54,9 +55,9 @@ class Payments extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getGroup()
+    public function getGuruh()
     {
-        return $this->hasOne(Group::className(), ['id' => 'group_id']);
+        return $this->hasOne(Group::class, ['id' => 'group_id']);
     }
 
 }

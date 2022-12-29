@@ -17,6 +17,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/payments.js',
+        //'https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

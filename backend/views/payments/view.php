@@ -44,7 +44,7 @@ $groupStudents = $model->groupStudents;
                                 <td>
                                     <?= $groupStudent->course_amount; ?>
                                 </td>
-                                <th>  <?= Html::a('To\'lash', ['payment', 'id' => $groupStudent->student_id], [
+                                <th>  <?= Html::a('To\'lash', ['payment', 'id' => $groupStudent->student_id, 'group_id' => $model->id], [
                                         'class' => 'btn btn-info',
                                     ]) ?></th>
                             </tr>
