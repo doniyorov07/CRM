@@ -1,6 +1,7 @@
 <?php
 
 namespace backend\controllers;
+use common\models\Search;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
@@ -19,12 +20,12 @@ class SalaryController extends Controller
                 'except' => ['error'],
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'index', ''],
+                        'actions' => ['login', 'error', 'index'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
                     [
-                        'actions' => ['logout', 'index', ''],
+                        'actions' => ['logout', 'index', 'view'],
                         'allow' => true,
                         'roles' => ['superadmin'],
                     ],
@@ -45,5 +46,15 @@ class SalaryController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionView()
+    {
+        $model = new Search();
+        return $this->render('view', [
+            'model' => $model,
+        ]);
+    }
+
+
 }
 

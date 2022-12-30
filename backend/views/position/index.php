@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\widgets\Alert;
@@ -39,6 +38,7 @@ $this->title = "Lavozim";
                             <thead>
                             <tr>
                                 <th>Lavozim</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>

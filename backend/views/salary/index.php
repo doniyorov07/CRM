@@ -1,6 +1,6 @@
 <?php
-
-
+use yii\helpers\Html;
+/** @var common\models\Position[] $model */
 $this->title = "Xodimlar ro'yxati";
 ?>
 <div class="table-responsive">
@@ -9,27 +9,23 @@ $this->title = "Xodimlar ro'yxati";
     <tr>
         <th scope="col">Xodim FISH</th>
         <th scope="col">Lavozim</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Telefon</th>
+        <th scope="col">To'lov holati</th>
+        <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody>
+    <?php foreach ($model as $models):?>
     <tr>
-
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
+        <td><?=$models->ismi . ' ' . $models->familiya ?></td>
+        <td><?= $models->lavozim?></td>
+        <td><?= $models->raqam?></td>
+        <td></td>
+        <td><?= Html::a('Ish-haqi hisoblash', ['view', 'id' => $models->id], [
+                'class' => 'btn btn-primary',
+            ]) ?></td>
     </tr>
-    <tr>
-
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-    </tr>
-    <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-    </tr>
+    <?php endforeach;?>
     </tbody>
 </table>
 </div>

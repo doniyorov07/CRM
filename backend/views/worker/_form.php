@@ -85,7 +85,7 @@ use common\models\Position;
   </div>
   <div class="form-group">
       <?= $form->field($model, 'lavozim')->widget(Select2::classname(), [
-          'data' => ArrayHelper::map(Position::find()->all(), 'id', 'lavozim'),
+          'data' => ArrayHelper::map(Position::find()->all(), 'name', 'name'),
           'language' => 'uz',
           'options' => ['placeholder' => 'Lavozimni tanlang ...'],
           'pluginOptions' => [

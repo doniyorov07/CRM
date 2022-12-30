@@ -1,9 +1,7 @@
 <?php
 
 namespace backend\controllers;
-use common\models\Group;
 use common\models\Position;
-use common\models\StudentGroup;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -46,16 +44,16 @@ class PositionController extends Controller
        $position = Position::find()->all();
        if ($this->request->isPost){
            if ($model->load($this->request->post()) && $model->save()) {
-               Yii::$app->session->setFlash('success', 'lavozim muvaffaqiyatli yaratildi');
+               Yii::$app->session->setFlash('success', 'Lavozim muvaffaqiyatli yaratildi');
                return $this->redirect(['index']);
-           }else {
-               $model->loadDefaultValues();
            }
-           return $this->render('index', [
-               'model' => $model,
-               'position' => $position,
-           ]);
+       }else {
+           $model->loadDefaultValues();
        }
+        return $this->render('index', [
+            'model' => $model,
+            'position' => $position,
+        ]);
     }
 
     public function actionDelete(int $id)
@@ -63,7 +61,6 @@ class PositionController extends Controller
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
-
     protected function findModel(int $id)
     {
         if (($model = Position::findOne(['id' => $id])) !== null) {
