@@ -115,7 +115,7 @@ use common\models\Position;
     <?= $form->field($model, 'shartnoma_muddati')->widget(DatePicker::classname(), [
         'name' => 'check_issue_date', 
         'value' => date('yyyy-mm-dd'),
-        'options' => ['placeholder' => 'Ishga kirgan sanasi'],
+        'options' => ['placeholder' => 'Shartnoma muddati oxiri!'],
         'pluginOptions' => [
             'format' => 'yyyy-mm-dd',
             'todayHighlight' => true

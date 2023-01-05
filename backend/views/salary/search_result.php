@@ -58,7 +58,41 @@ $this->title = "Ish haqini hisoblash";
         </div>
     </div>
 </section>
+<h1><?= $worker->ismi .' '. $worker->familiya?></h1>
+<?php
+/** @var string $groupleader */
+echo $groupleader;
+?>
+<ul>
+    <?php foreach ($model as $item):?>
+        <li><?=$item->payment_amount ?></li>
+        <li><?=$item->month ?></li>
+    <?php endforeach;?>
+</ul>
 
-
-
-
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Guruh  group_name</th>
+        <th scope="col">Davr month_name</th>
+        <th scope="col">Summa payments_amount</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Berdiyev Rasulbek</td>
+        <td>2023-12-13</td>
+        <td>200000</td>
+    </tr>
+    <tr>
+        <td>Berdiyev Rasulbek</td>
+        <td>2023-12-13</td>
+        <td>200000</td>
+    </tr>
+    <tr>
+        <td>Berdiyev Rasulbek</td>
+        <td>2023-12-13</td>
+        <td>200000</td>
+    </tr>
+    </tbody>
+</table>

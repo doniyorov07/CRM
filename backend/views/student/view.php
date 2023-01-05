@@ -144,15 +144,15 @@ $this->title = "Talaba haqida axborot";
                                                         <?php foreach ($model->studentGroups as $student): ?>
                                                             <tr>
                                                                 <td>
-                                                                    <?= $student->group ? $student->group->name : '' ?>
+                                                                    <?= $student->group ? $student->group->name : 'Guruh o\'chirilgan' ?>
                                                                     <br><br>
                                                                 </td>
                                                                 <td>
-                                                                    <?= $student->group ? $student->group->lesson_days : '' ?>
+                                                                    <?= $student->group ? $student->group->lesson_days : 'Guruh o\'chirilgan' ?>
                                                                     <br><br>
                                                                 </td>
                                                                 <td>
-                                                                    <?= $student->group ? $student->group->lesson_time : '' ?>
+                                                                    <?= $student->group ? $student->group->lesson_time : 'Guruh o\'chirilgan' ?>
                                                                     <br><br>
                                                                 </td>
                                                             </tr>
@@ -178,9 +178,9 @@ $this->title = "Talaba haqida axborot";
                                         <?php foreach ($model->paymentGroups as $payment): ?>
                                             <tr>
                                                 <td>
-                              <span class="badge badge-success">
-                                  <?= $payment->payment_amount; ?>
-                              </span>
+                                                 <span class="badge badge-success">
+                                               <?= $payment->payment_amount; ?>
+                                                </span>
                                                     <br>
                                                 </td>
                                                 <td>
@@ -200,17 +200,11 @@ $this->title = "Talaba haqida axborot";
                                         </tbody>
                                     </table>
                                 </div>
-                                <!-- /.tab-pane -->
                             </div>
-                            <!-- /.tab-content -->
-                        </div><!-- /.card-body -->
+                        </div
                     </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
-
 </div>

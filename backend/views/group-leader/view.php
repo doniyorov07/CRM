@@ -25,14 +25,14 @@ use yii\helpers\Html;
                 <?php foreach ($models as $model): ?>
                     <tr>
                         <td>
-                            <?= $model->group ? $model->group->name : '' ?>
+                            <?= $model->group ? $model->group->name : 'Guruh o\'chirilgan' ?>
                         </td>
                         <td>
                         </td>
                         <td></td>
                         <td>
-                            <?= $model->worker ? $model->worker->ismi : '' ?>
-                            <?= $model->worker ? $model->worker->familiya : '' ?>
+                            <?= $model->worker ? $model->worker->ismi : 'Xodim yo\'q' ?>
+                            <?= $model->worker ? $model->worker->familiya : 'Xodim yo\'q' ?>
                         </td>
                         <td></td>
                         <td></td>

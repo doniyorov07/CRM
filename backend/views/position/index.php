@@ -38,6 +38,9 @@ $this->title = "Lavozim";
                             <thead>
                             <tr>
                                 <th>Lavozim</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -45,6 +48,9 @@ $this->title = "Lavozim";
                             <?php foreach ($position as $pos) : ?>
                                 <tr>
                                     <td><?= $pos['name'] ?></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                     <td>
                                         <?= Html::a('<i class="fa fa-trash" aria-hidden="true"></i>', ['delete', 'id' => $pos->id], [
                                             'class' => 'btn btn-danger',
@@ -53,7 +59,15 @@ $this->title = "Lavozim";
                                                 'method' => 'post',
                                             ],
                                         ]) ?>
-                                    </td>
+
+                                        <?= Html::a('<i class="fa fa-edit" aria-hidden="true"></i>', ['update', 'id' => $model->id], [
+                                            'class' => 'btn btn-danger',
+                                            'data' => [
+                                                'confirm' => 'Haqiqatdan lavozimni o\'chirmoqchimisiz!',
+                                                'method' => 'post',
+                                            ],
+                                        ]) ?>
+                                    </>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

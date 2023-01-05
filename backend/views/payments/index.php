@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
@@ -10,7 +9,7 @@ use yii\helpers\ArrayHelper;
 use common\models\Group;
 use common\models\Month;
 use common\models\Payments;
-
+use common\widgets\Alert;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\StudentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -19,7 +18,7 @@ use common\models\Payments;
 $this->title = 'To\'lovlar';
 
 ?>
-
+<?= Alert::widget()?>
 <section class="content">
     <div class="container-fluid">
         <div class="row">

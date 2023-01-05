@@ -1,7 +1,11 @@
 <?php
 
 namespace backend\controllers;
-use common\models\Search;
+
+use common\models\Group;
+use common\models\GroupLeader;
+use common\models\Payments;
+use common\models\PaymentSearch;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
@@ -39,22 +43,39 @@ class SalaryController extends Controller
             ],
         ];
     }
+
     public function actionIndex()
     {
-        $model = Worker::find()->where(['status' => 1])->all();
+        $searchModel = new PaymentSearch();
+        $model = Payments::find()->all();
+        $worker = Worker::find()->all();
+        $groupleader = GroupLeader::find()->all();
+
+
+        if ($searchModel->load(Yii::$app->request->post()) && $searchModel->validate()) {
+            $model = Payments::find()
+                ->andWhere(['like', 'month', $searchModel->month])
+                ->all();
+            $worker = Worker::find()
+                ->andWhere(['id' => $searchModel->worker_id])
+                ->one();
+            $groupleader = GroupLeader::find()
+                ->andWhere(['worker_id' => $searchModel->worker_id])
+                ->all() == Group::find()
+                ->where('id')
+                ->all();
+            return $this->render('search_result', [
+                'model' => $model,
+                'worker' => $worker,
+                'groupleader' => $groupleader,
+                'searchModel' => $searchModel,
+            ]);
+
+        }
         return $this->render('index', [
-            'model' => $model,
+            'searchModel' => $searchModel,
         ]);
     }
-
-    public function actionView()
-    {
-        $model = new Search();
-        return $this->render('view', [
-            'model' => $model,
-        ]);
-    }
-
 
 }
 

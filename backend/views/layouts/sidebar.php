@@ -1,6 +1,9 @@
+<?php
+use yii\helpers\Url;
+?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="<?=Url::to('/admin/')?>" class="brand-link">
         <img src="<?=$assetDir?>/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">CRM.UZ</span>
     </a>
@@ -38,7 +41,6 @@
                            
                         ]
                     ],
-
                      [
                         'label' => 'Guruhlar',
                         'icon' => 'fas fa-users',
@@ -48,7 +50,6 @@
                            
                         ]
                     ],
-
                     [
                         'label' => 'To\'lovlar',
                         'icon' => 'fas fa-money-check-alt',
@@ -57,31 +58,14 @@
                            
                         ]
                     ],
-
                     [
                         'label' => 'Daromad',
+                        'icon' => 'fas fa-dollar-sign',
                         'items' => [
                              ['label' => '',  'icon' => ' ', 'url' => ['/']],
                            
                         ]
                     ],
-
-                    [
-                        'label' => 'Chiqimlar',
-                        'items' => [
-                             ['label' => '',  'icon' => ' ', 'url' => ['/']],
-                           
-                        ]
-                    ],
-
-                    [
-                        'label' => 'Imtihonlar',
-                        'items' => [
-                             ['label' => '',  'icon' => ' ', 'url' => ['/']],
-                           
-                        ]
-                    ],
-
                     [
                         'label' => 'Kadrlar b\'limi',
                         'icon' => 'fas fa-chalkboard-teacher',
@@ -94,10 +78,11 @@
                         ]
                     ],
                     [
-                        'label' => 'Hisobotlar',
+                        'label' => 'Tizimni sozlash',
                         'items' => [
-                             ['label' => '',  'icon' => ' ', 'url' => ['/']],
-                           
+                            ['label' => 'Umumiy sozlamalar',  'icon' => ' ', 'url' => ['/education/index']],
+                            ['label' => 'Login Parolni o\'zgartirish',  'icon' => ' ', 'url' => ['/profile-manager/']],
+
                         ]
                     ],
                 ],

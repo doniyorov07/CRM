@@ -37,9 +37,9 @@ $groupStudents = $model->groupStudents;
                        <?php foreach ($groupStudents as $groupStudent): ?>
                             <tr>
                                 <td>
-                                     <?= $groupStudent->student->ism; ?>
+                                     <?= $groupStudent->student ? $groupStudent->student->ism : 'Talaba o\'chirilgan' ?>
                                     &nbsp;
-                                    <?= $groupStudent->student->familiya; ?>
+                                    <?= $groupStudent->student ? $groupStudent->student->familiya : 'Talaba o\'chirilgan' ?>
                                 </td>
                                 <td>
                                     <?= $groupStudent->course_amount; ?>
@@ -52,14 +52,10 @@ $groupStudents = $model->groupStudents;
                         </tbody>
                     </table>
                 </div>
-                <!-- /.card-body -->
             </div>
         </div>
-        <!-- /.col -->
     </div>
-    <!-- /.row -->
 </div>
-<!-- /.container-fluid -->
 </section>
 
 

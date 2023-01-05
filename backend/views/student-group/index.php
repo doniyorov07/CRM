@@ -8,7 +8,7 @@
   use yii\helpers\ArrayHelper;
   use common\models\Student;
   use common\models\Group;
-
+  $this->title = "Talabani guruhga biriktirish";
   ?>
   <?= \common\widgets\Alert::widget()?>
   <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
@@ -17,7 +17,9 @@
       <div class="col-md-6">
         <div class="form-group">
          <?= $form->field($model, 'student_id')->widget(Select2::classname(), [
-          'data' => ArrayHelper::map(Student::find()->all(),'id','ism', 'familiya'),
+          'data' => ArrayHelper::map(Student::find()->all(),'id',  function ($data){
+                                    return $data->ism . ' ' . $data->familiya;
+          }),
           'language' => 'de',
           'options' => ['placeholder' => 'Talabani tanlang ...'],
           'pluginOptions' => [

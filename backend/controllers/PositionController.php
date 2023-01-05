@@ -18,12 +18,12 @@ class PositionController extends Controller
                 'except' => ['error'],
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'index'],
+                        'actions' => ['login', 'error', 'index', 'update'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
                     [
-                        'actions' => ['logout', 'index', 'delete'],
+                        'actions' => ['logout', 'index', 'delete', 'update'],
                         'allow' => true,
                         'roles' => ['superadmin'],
                     ],
@@ -54,6 +54,22 @@ class PositionController extends Controller
             'model' => $model,
             'position' => $position,
         ]);
+    }
+    public function actionUpdate(int $id)
+    {
+        $model = new Position();
+        if ($this->request->isPost){
+            if ($model->load($this->request->post()) && $model->save()){
+                Yii::$app->session->setFlash('succsess', 'Lavozim muvaffaqqiyatli o\'zgartirildi');
+                return $this->redirect(['index']);
+            }else {
+                $model->loadDefaultValues();
+            }
+        }
+        return $this->render('index', [
+            'model' => $model,
+        ]);
+
     }
 
     public function actionDelete(int $id)

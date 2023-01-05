@@ -41,7 +41,9 @@ $this->title = "Ta'lim"
                         </div>
                         <div class="form-group">
                             <?= $form->field($model, 'worker_id')->widget(Select2::classname(), [
-                                'data' => ArrayHelper::map(Worker::find()->all(), 'id', 'ismi', 'familiya'),
+                                'data' => ArrayHelper::map(Worker::find()->all(), 'id', function ($data){
+                                    return $data->ismi . ' ' . $data->familiya;
+                                }),
                                 'language' => 'de',
                                 'options' => ['placeholder' => 'Guruh rahbarini tanlang ...'],
                                 'pluginOptions' => [

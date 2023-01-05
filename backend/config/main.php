@@ -12,9 +12,12 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'language' => 'uz',
-    'modules' => [],
+    'modules' => [
+        'profile-manager' => [
+            'class' => 'backend\modules\profilemanager\Module'
+        ],
+    ],
     'components' => [
-
          'view' => [
          'theme' => [
              'pathMap' => [
