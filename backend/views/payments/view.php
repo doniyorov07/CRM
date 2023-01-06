@@ -5,7 +5,9 @@ use common\models\StudentGroup;
 use yii\helpers\Html;
 use yii\bootstrap5\Modal;
 /** @var Group $model */
-/** @var StudentGroup[] $groupStudents */
+/** @var StudentGroup[] $groupStudents
+ * @var $course_amount StudentGroup;
+ */
 $this->title = "Talabalar ro'yxati";
 $groupStudents = $model->groupStudents;
 ?>
@@ -44,7 +46,8 @@ $groupStudents = $model->groupStudents;
                                 <td>
                                     <?= $groupStudent->course_amount; ?>
                                 </td>
-                                <th>  <?= Html::a('To\'lash', ['payment', 'id' => $groupStudent->student_id, 'group_id' => $model->id], [
+                                <th>  <?= Html::a('To\'lash', ['payment', 'id' => $groupStudent->student_id,
+                                        'group_id' => $model->id], [
                                         'class' => 'btn btn-info',
                                     ]) ?></th>
                             </tr>

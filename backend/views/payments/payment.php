@@ -6,6 +6,10 @@ use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use kartik\date\DatePicker;
 use common\models\Group;
+$data = [
+        'Naxt' => 'Naxt',
+        'O\'tkazma' => 'O\'tkazma',
+];
 $group = Group::find()->all();
 /* @var $this yii\web\View */
 /* @var $model common\models\Payments */
@@ -40,12 +44,20 @@ $this->title = "Formani to'ldirishda e'tiborli bo'ling!";
     <div class="form-group">
         <?= $form->field($model, 'payment_amount')->textInput()?>
     </div>
-<!--    <div class="form-group">-->
-
-<!--    </div>-->
+    <div class="form-group">
+        <?= $form->field($model, 'payment_type')->widget(Select2::classname(), [
+                                'data' => $data,
+                                'language' => 'de',
+                                'options' => ['placeholder' => 'Guruh rahbarini tanlang ...'],
+                                'pluginOptions' => [
+                                    'allowClear' => true
+                                ],
+                            ]);
+        ?>
+    </div>
     <div class="form-group">
         <?= Html::submitButton('Saqlash', ['class' => 'btn btn-primary']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 
-</div><!-- update -->
+</div>

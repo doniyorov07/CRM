@@ -117,7 +117,7 @@ class PaymentsController extends Controller
 
         $model = new Payments([
             'student_id' => $models->id,
-            'group_id' => $group->id
+            'group_id' => $group->id,
         ]);
         if ($model->load($this->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'To\'lov muvaffaqqiyatli amalga oshirildi!');

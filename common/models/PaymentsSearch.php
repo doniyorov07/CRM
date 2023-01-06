@@ -18,7 +18,7 @@ class PaymentsSearch extends Payments
     {
         return [
             [['id', 'payment_amount', 'debt', 'group_id'], 'integer'],
-            [['name', 'payment_date', 'month', 'group'], 'safe'],
+            [['name', 'payment_date', 'month', 'group', 'payment_type'], 'safe'],
         ];
     }
 
@@ -66,6 +66,7 @@ class PaymentsSearch extends Payments
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'month', $this->month])
+            ->andFilterWhere(['like', 'payment_type', $this->payment_type])
             ->andFilterWhere(['like', 'group', $this->group]);
 
         return $dataProvider;

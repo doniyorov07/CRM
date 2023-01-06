@@ -34,7 +34,7 @@ class Payments extends \yii\db\ActiveRecord
         return [
             [['payment_date'], 'safe'],
             [['payment_amount', 'debt', 'group_id', 'student_id', 'status'], 'integer'],
-            [['name', 'month', 'group'], 'string', 'max' => 255],
+            [['name', 'month', 'group', 'payment_type'], 'string', 'max' => 255],
         ];
     }
 
@@ -51,7 +51,8 @@ class Payments extends \yii\db\ActiveRecord
             'debt' => 'Qarz',
             'month' => 'Oy',
             'group' => 'Guruh',
-            'group_id' => 'Guruh nomi'
+            'group_id' => 'Guruh nomi',
+            'payment_type' => "To'lov turi",
         ];
     }
 
