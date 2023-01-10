@@ -17,7 +17,7 @@ class PaymentsSearch extends Payments
     public function rules()
     {
         return [
-            [['id', 'payment_amount', 'debt', 'group_id'], 'integer'],
+            [['id', 'payment_amount', 'course_amount', 'group_id'], 'integer'],
             [['name', 'payment_date', 'month', 'group', 'payment_type'], 'safe'],
         ];
     }
@@ -61,7 +61,8 @@ class PaymentsSearch extends Payments
             'id' => $this->id,
             'payment_date' => $this->date_of_lesson,
             'payment_amount' => $this->discount,
-            'debt' => $this->debt,
+            'course_amount' => $this->course_amount,
+            'payment_discount' => $this->payment_discount,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

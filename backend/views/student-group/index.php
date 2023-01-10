@@ -10,7 +10,9 @@
   use common\models\Group;
   $this->title = "Talabani guruhga biriktirish";
   ?>
-  <?= \common\widgets\Alert::widget()?>
+  <?php
+  echo \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+  ?>
   <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
   <div class="card-body">
     <div class="row">
@@ -60,15 +62,13 @@
   </div>
   </div>
       <div class="col-md-6">
-          <div class="form-group">
-              <?= $form->field($model, 'course_amount')->textInput(['placeholder' => "Talaba uchun chegirma bo'lishi mumkin"]) ?>
+          <div style="margin-top: 31px" class="form-group">
+              <?= Html::submitButton('Biriktirish', ['class' => 'btn btn-primary']) ?>
           </div>
       </div>
 
   </div>
-  <div class="form-group">
-    <?= Html::submitButton('Biriktirish', ['class' => 'btn btn-success']) ?>
-  </div>
+
 
   </div>
 

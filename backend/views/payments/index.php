@@ -1,14 +1,5 @@
 <?php
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use yii\helpers\Url;
-use yii\grid\ActionColumn;
-use yii\grid\GridView;
-use kartik\select2\Select2;
-use yii\helpers\ArrayHelper;
-use common\models\Group;
-use common\models\Month;
-use common\models\Payments;
 use common\widgets\Alert;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\StudentSearch */
@@ -18,7 +9,9 @@ use common\widgets\Alert;
 $this->title = 'To\'lovlar';
 
 ?>
-<?= Alert::widget()?>
+<?php
+echo \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+?>
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -26,7 +19,9 @@ $this->title = 'To\'lovlar';
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title"> Barcha guruhlar ro'yxati </h3>
-                        <button onclick="ExportToExcel('xlsx')"><i class="fas fa-file-excel"></i></button>
+                        <div class="d-flex justify-content-end">
+                            <button onclick="ExportToExcel('xlsx')"><i class="fas fa-file-excel"></i></button>
+                        </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -55,14 +50,10 @@ $this->title = 'To\'lovlar';
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
                 </div>
             </div>
-            <!-- /.col -->
         </div>
-        <!-- /.row -->
     </div>
-    <!-- /.container-fluid -->
 </section>
 <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 <script>

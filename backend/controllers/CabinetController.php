@@ -6,7 +6,6 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
-use yii\data\ActiveDataProvider;
 class CabinetController extends Controller
 {   
   public function behaviors()
@@ -42,7 +41,7 @@ public function actionIndex()
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['index']);
             }
-        } else {
+        }else {
             $model->loadDefaultValues();
         }
 

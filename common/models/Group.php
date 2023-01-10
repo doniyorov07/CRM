@@ -35,6 +35,7 @@ class Group extends \yii\db\ActiveRecord
     {
         return [
             [['lesson_days'], 'safe'],
+            [['name', 'lesson_time', 'course_amount', 'lesson_days'], 'required'],
             [['created_at', 'updated_at', 'created_by', 'status', 'updated_by', 'course_amount'], 'integer'],
             [['name'], 'string', 'max' => 100],
             [['lesson_time'], 'string', 'max' => 255],

@@ -1,26 +1,43 @@
 <?php
 
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
-
+use kartik\export\ExportMenu;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\WorkerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Xodimlar';
 $this->params['breadcrumbs'][] = $this->title;
+$table = [
+    ['class' => 'yii\grid\SerialColumn'],
+    'ismi',
+    'familiya',
+    'lavozim',
+    'raqam',
+];
 ?>
-<?= \common\widgets\Alert::widget()?>
+<?php
+echo \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+?>
+<div>
+    <?php
+    echo ExportMenu::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => $table,
+        'exportConfig' => [
+            ExportMenu::FORMAT_HTML => false,
+            ExportMenu::FORMAT_CSV => false,
+            ExportMenu::FORMAT_EXCEL => false,
+        ],
+        'showConfirmAlert' => false,
+        'clearBuffers' => true,
+    ]);
+    ?>
+</div>
 <div class="worker-index">
-  <!--   <p>
-        <?= Html::a('Xodim Qo\'shish', ['create'], ['class' => 'btn btn-success']) ?>
-    </p> -->
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
+     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -33,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'lavozim',
             //'qabul_sanasi',
             //'tugilgan_yil',
-            //'raqam',
+            'raqam',
             //'staj',
            [
             'attribute'=>'status',
@@ -47,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return '<i class="badge badge-danger">Faol emas</i>';
             };
                 },
-              
+
             ],
             //'oqitish_tili',
             //'image',

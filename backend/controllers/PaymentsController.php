@@ -12,7 +12,6 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\Response;
 
 /**
  * PaymentsController implements the CRUD actions for Payments model.
@@ -30,12 +29,12 @@ class PaymentsController extends Controller
                 'except' => ['error'],
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'index', 'delete', 'payment', 'view', 'create', 'search'],
+                        'actions' => ['login', 'error', 'index', 'delete', 'payment', 'view', 'create', 'search', 'payview'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
                     [
-                        'actions' => ['logout', 'index', 'delete', 'payment', 'view', 'create', 'search'],
+                        'actions' => ['logout', 'index', 'delete', 'payment', 'view', 'create', 'search', 'payview'],
                         'allow' => true,
                         'roles' => ['superadmin'],
                     ],
@@ -118,6 +117,7 @@ class PaymentsController extends Controller
         $model = new Payments([
             'student_id' => $models->id,
             'group_id' => $group->id,
+            'course_amount' => Yii::$app->request->get('course_amount'),
         ]);
         if ($model->load($this->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', 'To\'lov muvaffaqqiyatli amalga oshirildi!');
@@ -157,18 +157,5 @@ class PaymentsController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionSearch()
-    {
-        $model = new \common\models\Group();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate()) {
-                $search = \common\models\Group::find()->where(['like', 'name', $model->name])->all();
-                return $this->render('search', [
-                    'search' => $search,
-                    'model' => $model,
-                ]);
-            }
-        }
-
-    }
+   
 }

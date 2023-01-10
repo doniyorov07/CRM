@@ -41,11 +41,12 @@ class Worker extends \yii\db\ActiveRecord
         return [
             [['shartnoma_muddati', 'qabul_sanasi', 'tugilgan_yil'], 'safe'],
             [['status'], 'integer'],
+            [['ismi', 'familiya', 'raqam', 'qabul_sanasi', 'tugilgan_yili', 'staj', 'lavozim', 'oqitish_tili', 'image'], 'required'],
             [['ismi', 'familiya', 'staj'], 'string', 'max' => 20],
             [['lavozim'], 'string', 'max' => 30],
             [['raqam'], 'string', 'max' => 25],
             [['oqitish_tili', 'image'], 'string', 'max' => 255],
-              [['image'], 'file', 'extensions' => 'png, jpg, JPG, webp', 'maxSize' => 2*(1024*1024)],
+            [['image'], 'file', 'extensions' => 'png, jpg, JPG, webp', 'maxSize' => 3*(1024*1024)],
         ];
     }
 

@@ -1,29 +1,43 @@
 <?php
 
-use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\grid\ActionColumn;
-use yii\grid\GridView;
-use common\models\Student;
+use kartik\export\ExportMenu;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\StudentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Talabalar';
+$table = [
+    ['class' => 'yii\grid\SerialColumn'],
+    'ism',
+    'familiya',
+    'raqami',
+];
 
 ?>
-<?= \common\widgets\Alert::widget()?>
+<?php
+echo \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+?>
 <div class="student-index">
+<div>
+    <?php
+    echo ExportMenu::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => $table,
+        'exportConfig' => [
+            ExportMenu::FORMAT_HTML => false,
+            ExportMenu::FORMAT_CSV => false,
+            ExportMenu::FORMAT_EXCEL => false,
+        ],
+        'showConfirmAlert' => false,
+        'clearBuffers' => true,
+    ]);
+    ?>
+</div>
 
-<!-- 
-    <p>
-        <?= Html::a('Talaba Qo\'shish', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
- -->
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
+    <?= \kartik\grid\GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -52,12 +66,10 @@ $this->title = 'Talabalar';
             {
                 return '<i class="badge badge-danger">Faol emas</i>';
             };
-                },
-              
+             },
             ],
             [
                 'class' => ActionColumn::className(),
-               
             ],
         ],
     ]); ?>

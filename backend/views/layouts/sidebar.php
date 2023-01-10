@@ -55,6 +55,7 @@ use yii\helpers\Url;
                         'icon' => 'fas fa-money-check-alt',
                         'items' => [
                              ['label' => 'To\'lov',  'icon' => ' ', 'url' => ['/payments']],
+                             ['label' => 'To\'lovlar tarixi',  'icon' => ' ', 'url' => ['/payhistory']],
                            
                         ]
                     ],

@@ -33,7 +33,8 @@ class Payments extends \yii\db\ActiveRecord
     {
         return [
             [['payment_date'], 'safe'],
-            [['payment_amount', 'debt', 'group_id', 'student_id', 'status'], 'integer'],
+            [['payment_date', 'month', 'payment_amount', 'payment_type'], 'required'],
+            [['payment_amount', 'course_amount', 'group_id', 'student_id', 'status', 'payment_discount'], 'integer'],
             [['name', 'month', 'group', 'payment_type'], 'string', 'max' => 255],
         ];
     }
@@ -48,11 +49,12 @@ class Payments extends \yii\db\ActiveRecord
             'name' => 'Talaba FISH',
             'payment_date' => 'To\'lov sanasi',
             'payment_amount' => 'To\'lov summasi',
-            'debt' => 'Qarz',
+            'course_amount' => 'Kurs narxi',
             'month' => 'Oy',
             'group' => 'Guruh',
             'group_id' => 'Guruh nomi',
             'payment_type' => "To'lov turi",
+            'payment_discount' => "Chegirma miqdori",
         ];
     }
 
@@ -60,5 +62,12 @@ class Payments extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Group::class, ['id' => 'group_id']);
     }
+
+    public function getStudentsPay()
+    {
+        return $this->hasOne(Student::className(), ['id' => 'student_id']);
+    }
+
+
 
 }

@@ -55,26 +55,11 @@ class PositionController extends Controller
             'position' => $position,
         ]);
     }
-    public function actionUpdate(int $id)
-    {
-        $model = new Position();
-        if ($this->request->isPost){
-            if ($model->load($this->request->post()) && $model->save()){
-                Yii::$app->session->setFlash('succsess', 'Lavozim muvaffaqqiyatli o\'zgartirildi');
-                return $this->redirect(['index']);
-            }else {
-                $model->loadDefaultValues();
-            }
-        }
-        return $this->render('index', [
-            'model' => $model,
-        ]);
-
-    }
 
     public function actionDelete(int $id)
     {
         $this->findModel($id)->delete();
+        Yii::$app->session->setFlash('success', 'Lavozim muvaffaqiyatli o\'chirildi');
         return $this->redirect(['index']);
     }
     protected function findModel(int $id)

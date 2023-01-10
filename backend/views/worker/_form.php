@@ -146,7 +146,7 @@ use common\models\Position;
 <br>
 <br>
 <div class="form-group">
-    <?= Html::submitButton('Saqlash', ['class' => 'btn btn-success']) ?>
+    <?= Html::submitButton('Saqlash', ['class' => 'btn btn-primary']) ?>
 </div>
 </div>
 </div>

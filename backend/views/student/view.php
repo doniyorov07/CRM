@@ -169,6 +169,8 @@ $this->title = "Talaba haqida axborot";
                                         <thead>
                                         <tr>
                                             <th scope="col">Miqdori</th>
+                                            <th scope="col">Qarzi</th>
+                                            <th scope="col">Chegirma</th>
                                             <th scope="col">Guruhi</th>
                                             <th scope="col">Vaqti</th>
                                             <th scope="col">Oyi</th>
@@ -179,7 +181,19 @@ $this->title = "Talaba haqida axborot";
                                             <tr>
                                                 <td>
                                                  <span class="badge badge-success">
-                                               <?= $payment->payment_amount; ?>
+                                               <?= $payment->payment_amount ? $payment->payment_amount : "To'lov o'chirilgan"; ?>
+                                                </span>
+                                                    <br>
+                                                </td>
+                                                <td>
+                                                 <span class="badge badge-danger">
+                                               <?= $payment->course_amount - $payment->payment_amount; ?>
+                                                </span>
+                                                    <br>
+                                                </td>
+                                                <td>
+                                                 <span class="badge badge-warning">
+                                               <?= $payment->payment_discount ? $payment->payment_discount : "Yo'q";; ?>
                                                 </span>
                                                     <br>
                                                 </td>

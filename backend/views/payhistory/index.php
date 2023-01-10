@@ -3,10 +3,13 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
+use common\models\Group;
 /** @var common\models\Position[] $model */
-/** @var $model \common\models\Payments */
-/** @var $searchModel \common\models\PaymentSearch */
-$this->title = "Ish haqini hisoblash";
+/** @var $searchModel \common\models\PayHistorySearch */
+$this->title = "";
+?>
+<?php
+echo \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
 ?>
 <section class="content">
     <div class="container-fluid">
@@ -32,12 +35,10 @@ $this->title = "Ish haqini hisoblash";
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <?= $form->field($searchModel, 'worker_id')->widget(Select2::classname(), [
-                                'data' => ArrayHelper::map(\common\models\Worker::find()->all(),'id',function ($data){
-                                    return $data->ismi.' '.$data->familiya;
-                                }),
+                            <?= $form->field($searchModel, 'group_id')->widget(Select2::classname(), [
+                                'data' => ArrayHelper::map(Group::find()->all(),'id', 'name'),
                                 'language' => 'de',
-                                'options' => ['placeholder' => 'Xodimni tanlang ...'],
+                                'options' => ['placeholder' => 'Guruhni tanlang ...'],
                                 'pluginOptions' => [
                                     'allowClear' => true
                                 ],
@@ -58,6 +59,7 @@ $this->title = "Ish haqini hisoblash";
         </div>
     </div>
 </section>
+
 
 
 

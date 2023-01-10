@@ -34,6 +34,7 @@ class StudentGroup extends \yii\db\ActiveRecord
     {
         return [
             [['group_id', 'student_id', 'course_id', 'course_amount'], 'integer'],
+            [['student_id', 'group_id', 'started_at'], 'required'],
             [['leson_time'], 'string'],
             [['started_at', 'finished_at', 'lesson_days'], 'safe'],
           

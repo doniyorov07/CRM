@@ -32,7 +32,7 @@ class GroupLeader extends \yii\db\ActiveRecord
     {
         return [
             [['group_id', 'worker_id'], 'integer'],
-            [['group_name', 'wroker_name'], 'string', 'max' => 255],
+            [['group_id', 'worker_id'], 'required'],
         ];
     }
 
@@ -45,8 +45,6 @@ class GroupLeader extends \yii\db\ActiveRecord
             'id' => 'ID',
             'group_id' => 'Guruh',
             'worker_id' => 'Guruh rahbari ',
-            'group_name' => 'Group Name',
-            'wroker_name' => 'Wroker Name',
         ];
     }
 

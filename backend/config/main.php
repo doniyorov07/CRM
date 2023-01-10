@@ -13,11 +13,24 @@ return [
     'bootstrap' => ['log'],
     'language' => 'uz',
     'modules' => [
+        'gridview' => [
+            'class' => 'kartik\grid\Module',
+        ],
         'profile-manager' => [
             'class' => 'backend\modules\profilemanager\Module'
         ],
     ],
     'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'yii2mod\alert\AlertAsset' => [
+                    'css' => [
+                        'dist/sweetalert.css',
+                        'themes/twitter/twitter.css',
+                    ]
+                ],
+            ],
+        ],
          'view' => [
          'theme' => [
              'pathMap' => [
@@ -25,7 +38,6 @@ return [
              ],
          ],
     ],
-
         'request' => [
             'csrfParam' => '_csrf-backend',
             'baseUrl' => '/admin',
@@ -37,7 +49,6 @@ return [
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
         'session' => [
-            // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
         ],
         'log' => [
@@ -52,7 +63,6 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,

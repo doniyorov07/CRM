@@ -6,7 +6,9 @@ use common\widgets\Alert;
 /** @var \common\models\Position $position [] */
 $this->title = "Lavozim";
 ?>
-<?= Alert::widget() ?>
+<?php
+echo \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+?>
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -23,7 +25,7 @@ $this->title = "Lavozim";
                         </div>
                     </div>
                     <div class="card-footer">
-                        <?= Html::submitButton('Saqlash', ['class' => 'btn btn-success']) ?>
+                        <?= Html::submitButton('Saqlash', ['class' => 'btn btn-primary']) ?>
                     </div>
                     <?php ActiveForm::end(); ?>
                 </div>
@@ -59,15 +61,6 @@ $this->title = "Lavozim";
                                                 'method' => 'post',
                                             ],
                                         ]) ?>
-
-                                        <?= Html::a('<i class="fa fa-edit" aria-hidden="true"></i>', ['update', 'id' => $model->id], [
-                                            'class' => 'btn btn-danger',
-                                            'data' => [
-                                                'confirm' => 'Haqiqatdan lavozimni o\'chirmoqchimisiz!',
-                                                'method' => 'post',
-                                            ],
-                                        ]) ?>
-                                    </>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

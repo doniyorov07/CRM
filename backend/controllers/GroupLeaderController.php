@@ -73,6 +73,7 @@ class GroupLeaderController extends \yii\web\Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        Yii::$app->session->setFlash('success', 'Guruh rahbari muvaffaqiyatli o\'chirildi!');
         return $this->redirect(['index']);
     }
 

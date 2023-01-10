@@ -1,15 +1,11 @@
-<?php 
-
+<?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Cabinet;
+use yii\bootstrap4\Modal;
 $cabinet = Cabinet::find()->all();
 $this->title = "Kabinetlar"
 ?>
-
-
- 
-
  <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -75,8 +71,15 @@ $this->title = "Kabinetlar"
               </div>
             </div>
           </div>
-          
-
         </div>
       </div>
     </section>
+<?php
+    Modal::begin([
+'header' => '<h2>Hello world</h2>',
+'toggleButton' => ['label' => 'click me'],
+]);
+
+echo 'Say hello...';
+
+Modal::end();

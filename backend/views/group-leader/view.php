@@ -1,8 +1,6 @@
 <?php
 
 use yii\helpers\Html;
-
-
 /** @var common\models\GroupLeader[] $models */
 ?>
 
@@ -27,12 +25,10 @@ use yii\helpers\Html;
                         <td>
                             <?= $model->group ? $model->group->name : 'Guruh o\'chirilgan' ?>
                         </td>
-                        <td>
-                        </td>
+                        <td></td>
                         <td></td>
                         <td>
-                            <?= $model->worker ? $model->worker->ismi : 'Xodim yo\'q' ?>
-                            <?= $model->worker ? $model->worker->familiya : 'Xodim yo\'q' ?>
+                            <?= $model->worker ? $model->worker->ismi . ' ' . $model->worker->familiya : 'Xodim o\'chirilgan' ?>
                         </td>
                         <td></td>
                         <td></td>

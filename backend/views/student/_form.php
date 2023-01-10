@@ -5,8 +5,6 @@ use yii\widgets\ActiveForm;
 use kartik\switchinput\SwitchInput;
 use kartik\select2\Select2;
 use kartik\date\DatePicker;
-use common\models\Group;
-use yii\helpers\ArrayHelper;
 ?>
 <?= \common\widgets\Alert::widget()?>
 <div class="student-form">
@@ -69,11 +67,7 @@ use yii\helpers\ArrayHelper;
 
       </div>
     </div>
-    <!-- /.card -->
-
   </div>
-  <!--/.col (left) -->
-  <!-- right column -->
   <div class="col-md-6">
     
    <div class="card card-primary">
@@ -84,10 +78,8 @@ use yii\helpers\ArrayHelper;
   
    <div class="form-group">
      <?= $form->field($model, 'yonalishi')->textInput(['placeholder' => 'Matematika/Fizika ko\'rinishida kiriting']) ?>
-                </div>
-
+     </div>
 <div class="form-group">
- 
   <?= $form->field($model, 'qabul_sanasi')->widget(DatePicker::classname(), [
     'name' => 'check_issue_date', 
     'value' => date('yyyy-mm-dd'),
@@ -99,8 +91,6 @@ use yii\helpers\ArrayHelper;
   ]);
   ?>
 </div>
-
-
 <div class="form-group">
   <?= $form->field($model, 'oqitish_tili')->checkboxList(
     [
@@ -112,7 +102,7 @@ use yii\helpers\ArrayHelper;
   ) ?>
 </div>
 <div class="form-group">
-  <?= Html::submitButton('Saqlash', ['class' => 'btn btn-success']) ?>
+  <?= Html::submitButton('Saqlash', ['class' => 'btn btn-primary']) ?>
 </div>
 </div>
 </div>
@@ -120,9 +110,5 @@ use yii\helpers\ArrayHelper;
 </div>
 </div>
 </section>
-
-
-
 <?php ActiveForm::end(); ?>
-
 </div>

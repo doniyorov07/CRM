@@ -2,19 +2,17 @@
 
 namespace backend\controllers;
 
+use common\models\Group;
 use common\models\GroupLeader;
 use common\models\Payments;
-use common\models\PaymentSearch;
-use common\models\Salary;
+use common\models\PayHistorySearch;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use yii\web\NotFoundHttpException;
 use yii\web\Controller;
-use common\models\Worker;
 use Yii;
+use yii\web\NotFoundHttpException;
 
-
-class SalaryController extends Controller
+class PayhistoryController extends Controller
 {
     public function behaviors()
     {
@@ -24,12 +22,12 @@ class SalaryController extends Controller
                 'except' => ['error'],
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'index', 'paycount'],
+                        'actions' => ['login', 'error', 'index', 'view', 'delete'],
                         'allow' => true,
                         'roles' => ['admin'],
                     ],
                     [
-                        'actions' => ['logout', 'index', 'view', 'paycount'],
+                        'actions' => ['logout', 'index', 'view', 'delete'],
                         'allow' => true,
                         'roles' => ['superadmin'],
                     ],
@@ -46,45 +44,38 @@ class SalaryController extends Controller
 
     public function actionIndex()
     {
-        $searchModel = new PaymentSearch();
-
-        if ($searchModel->load(Yii::$app->request->post()) && $searchModel->validate()) {
-
-            $worker = Worker::find()
-                ->andWhere(['id' => $searchModel->worker_id])
-                ->one();
-
-            $workerGroups = GroupLeader::find()
-                ->andWhere(['worker_id' => $worker->id])
-                ->all();
-
-            $ids = [];
-            foreach ($workerGroups as $workerGroup) {
-                $ids[] = $workerGroup->group_id;
-            }
+        $searchModel = new PayhistorySearch();
+        if ($searchModel->load(Yii::$app->request->post()) && $searchModel->validate()){
 
             $model = Payments::find()
-                ->andWhere(['in', 'group_id', $ids])
                 ->andWhere(['like', 'month', $searchModel->month])
                 ->all();
-
-            $models = new Salary();
-            if ($models->load($this->request->post()) && $models->save()) {
-                return $this->redirect(['index']);
-            }
-
-            return $this->render('search_result', [
+            $group_id = Group::find()
+                ->andWhere(['id' => $searchModel->group_id])
+                ->one();
+            return $this->render('view', [
                 'model' => $model,
-                'models' => $models,
-                'worker' => $worker,
-                'workerGroups' => $workerGroups,
+                'group_id' => $group_id,
                 'searchModel' => $searchModel,
             ]);
-
         }
         return $this->render('index', [
             'searchModel' => $searchModel,
         ]);
     }
+    public function actionDelete($id)
+{
+    $this->findModel($id)->delete();
+    Yii::$app->session->setFlash('success', 'To\'lov o\'chirildi!');
+    return $this->redirect(['index']);
 }
 
+    protected function findModel($id)
+    {
+        if (($model = Payments::findOne(['id' => $id])) !== null) {
+            return $model;
+        }
+        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+}

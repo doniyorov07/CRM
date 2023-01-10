@@ -34,7 +34,7 @@ $this->title = "Formani to'ldirishda e'tiborli bo'ling!";
     <?= $form->field($model, 'month')->widget(Select2::classname(), [
         'data' => ArrayHelper::map(\common\models\Month::find()->all(),'month_name','month_name'),
         'language' => 'de',
-        'options' => ['placeholder' => 'Oyni tanlang ...'],
+        'options' => ['placeholder' => 'Talaba qaysi oy uchun to\'lov qilyapti...'],
         'pluginOptions' => [
             'allowClear' => true
         ],
@@ -44,11 +44,25 @@ $this->title = "Formani to'ldirishda e'tiborli bo'ling!";
     <div class="form-group">
         <?= $form->field($model, 'payment_amount')->textInput()?>
     </div>
+
+
+    <div class="form-group">
+        <label for="chkPassport">
+            <input type="checkbox" id="chkPassport" />
+           Talaba uchun chegirma mavjudmi?
+        </label>
+        <div id="dvPassport" style="display: none">
+            <?= $form->field($model, 'payment_discount')->textInput()?>
+        </div>
+
+    </div>
+
+
     <div class="form-group">
         <?= $form->field($model, 'payment_type')->widget(Select2::classname(), [
                                 'data' => $data,
                                 'language' => 'de',
-                                'options' => ['placeholder' => 'Guruh rahbarini tanlang ...'],
+                                'options' => ['placeholder' => 'To\'lov turini tanlang ...'],
                                 'pluginOptions' => [
                                     'allowClear' => true
                                 ],
@@ -61,3 +75,18 @@ $this->title = "Formani to'ldirishda e'tiborli bo'ling!";
     <?php ActiveForm::end(); ?>
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+
+    $(function () {
+        $("#chkPassport").click(function () {
+            if ($(this).is(":checked")) {
+                $("#dvPassport").show();
+                $("#AddPassport").hide();
+            } else {
+                $("#dvPassport").hide();
+                $("#AddPassport").show();
+            }
+        });
+    });
+</script>

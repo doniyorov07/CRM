@@ -10,7 +10,9 @@ use common\widgets\Alert;
 $this->title = "Guruhlar";
 ?>
 
-<?= Alert::widget() ?>
+<?php
+echo \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
+?>
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -49,7 +51,7 @@ $this->title = "Guruhlar";
                         </div>
                     </div>
                     <div class="card-footer">
-                        <?= Html::submitButton('Saqlash', ['class' => 'btn btn-success']) ?>
+                        <?= Html::submitButton('Saqlash', ['class' => 'btn btn-primary']) ?>
                     </div>
                     <?php ActiveForm::end(); ?>
                 </div>
