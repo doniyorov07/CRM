@@ -10,18 +10,25 @@ use yii\helpers\Html;
 $this->title = $name;
 ?>
 <div class="site-error">
+    <div style="padding: 180px; margin-left: 30%" class="innerContent-wrap">
+        <div class="container">
+            <div class="404-wrap">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="four-zero-page">
+                            <h2 style="color:   rgb(51, 204, 255);">404</h2>
+                            <h3 style="color: red;">Sahifa topilmadi</h3>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 404 End -->
 
-    <div class="alert alert-danger">
-        <?= nl2br(Html::encode($message)) ?>
+        </div>
     </div>
+    <!-- Inner Content Start -->
 
-    <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
-    </p>
+
 
 </div>

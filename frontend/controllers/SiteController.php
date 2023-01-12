@@ -77,6 +77,10 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+    public function actionDemo()
+    {
+        return $this->render('demo');
+    }
 
     /**
      * Logs in a user.

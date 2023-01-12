@@ -60,14 +60,6 @@ use yii\helpers\Url;
                         ]
                     ],
                     [
-                        'label' => 'Daromad',
-                        'icon' => 'fas fa-dollar-sign',
-                        'items' => [
-                             ['label' => '',  'icon' => ' ', 'url' => ['/']],
-                           
-                        ]
-                    ],
-                    [
                         'label' => 'Kadrlar b\'limi',
                         'icon' => 'fas fa-chalkboard-teacher',
                         'items' => [

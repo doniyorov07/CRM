@@ -1,7 +1,7 @@
 <?php
 
 namespace common\models;
-
+use yii\behaviors\TimestampBehavior;
 use Yii;
 
 /**
@@ -49,6 +49,12 @@ class Salary extends \yii\db\ActiveRecord
     public function getGroups()
     {
         return $this->hasOne(Payments::className(), ['id' => 'group_id']);
+    }
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class,
+        ];
     }
 
 }

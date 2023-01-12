@@ -83,7 +83,7 @@ $this->title = "Ish haqini hisoblash";
                             <th>Talaba F.I.SH</th>
                             <th>Guruh nomi</th>
                             <th>To'lov vaqti </th>
-                            <th>Jami</th>
+                            <th>Jami <?php echo '&nbsp &nbsp' . $sum?></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -159,3 +159,4 @@ JS;
 
 $this->registerJs($js);
 ?>
+

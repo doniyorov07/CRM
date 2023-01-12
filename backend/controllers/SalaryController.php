@@ -68,14 +68,34 @@ class SalaryController extends Controller
                 ->andWhere(['like', 'month', $searchModel->month])
                 ->all();
 
-            $models = new Salary();
+            $sum = Payments::find()
+                ->andWhere(['in', 'group_id', $ids])
+                ->andWhere(['like', 'month', $searchModel->month])
+                ->select('payment_amount')
+                ->sum('payment_amount');
+
+            $month = Payments::find()
+                ->andWhere(['in', 'group_id', $ids])
+                ->andWhere(['like', 'month', $searchModel->month])
+                ->one();
+
+            $models = new Salary([
+                'pay_total' => $sum,
+                'month' => $month->month,
+            ]);
+
             if ($models->load($this->request->post()) && $models->save()) {
+                echo "<pre>";
+                print_r($models);
+                echo "</pre>";
+
                 return $this->redirect(['index']);
             }
 
             return $this->render('search_result', [
                 'model' => $model,
                 'models' => $models,
+                'sum' => $sum,
                 'worker' => $worker,
                 'workerGroups' => $workerGroups,
                 'searchModel' => $searchModel,

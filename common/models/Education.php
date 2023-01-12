@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "education".
@@ -33,6 +34,7 @@ class Education extends \yii\db\ActiveRecord
         return [
             [['edu_number', 'status'], 'integer'],
             [['edu_name', 'edu_location', 'edu_email', 'image'], 'string', 'max' => 255],
+            [['image'], 'file', 'extensions' => 'png, jpg, JPG, webp', 'maxSize' => 5*(1024*1024)],
         ];
     }
 
@@ -50,5 +52,18 @@ class Education extends \yii\db\ActiveRecord
             'image' => 'O\'quv markazi logotipi',
             'status' => 'Holati',
         ];
+    }
+
+    public function uploadImg($oldImage = null)
+    {
+
+        $this->image = UploadedFile::getInstance($this, 'image');
+        if (isset($this->image)) {
+            $this->image->saveAs('@backend/web/logo/' . $this->image->baseName . '.' . $this->image->extension);
+            $this->image = $this->image->baseName.'.'.$this->image->extension;
+        }else{
+            $this->image = $oldImage;
+        }
+
     }
 }
