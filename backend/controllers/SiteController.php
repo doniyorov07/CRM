@@ -3,10 +3,13 @@
 namespace backend\controllers;
 
 use common\models\LoginForm;
+use common\models\Student;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\VerifyEmailForm;
+use Mpdf\Tag\S;
+use PhpOffice\PhpSpreadsheet\Calculation\DateTimeExcel\DateParts;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\filters\VerbFilter;
@@ -14,7 +17,8 @@ use yii\filters\AccessControl;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\Response;
-
+use common\models\Worker;
+use common\models\Group;
 /**
  * Site controller
  */
@@ -68,7 +72,25 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $student = Student::find()->count('id');
+        $worker = Worker::find()->count('id');
+        $group = Group::find()->count('id');
+
+
+        $model = Student::find()->select('yosh')->all();
+
+//        echo "<pre>";
+//        var_dump($model);
+//        echo "</pre>";
+
+
+
+        return $this->render('index', [
+            'student' => $student,
+            'worker' => $worker,
+            'group' => $group,
+            'model' => $model,
+        ]);
     }
 
     /**

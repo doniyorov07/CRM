@@ -1,12 +1,14 @@
 <?php
+
+use dosamigos\chartjs\ChartJs;
 $this->title = 'Admin Panel';
 $this->params['breadcrumbs'] = [['label' => $this->title]];
-use common\models\Student;
-use common\models\Worker;
-use common\models\Group;
-$student = Student::find()->count('id');
-$worker = Worker::find()->count('id');
-$group = Group::find()->count('id');
+/**
+ *@var $model \yii\web\Controller
+ *@var $student \yii\web\Controller
+ *@var $worker \yii\web\Controller
+ *@var $group \yii\web\Controller
+ */
 ?>
  <section class="content">
       <div class="container-fluid">
@@ -74,4 +76,39 @@ $group = Group::find()->count('id');
         </div>
       </div><!-- /.container-fluid -->
     </section>
+
+<?php
+$array = [];
+foreach ($model as $item) {
+    $array [] = $item->yosh;
+}
+?>
+
+<?= ChartJs::widget([
+    'type' => 'bar',
+    'options' => [
+        'height' => 150,
+        'width' => 600
+    ],
+    'data' => [
+        'labels' => ["Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avgust", 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'],
+        'datasets' => [
+            [
+                'label' => "Talabalar soni",
+                'hoverBackgroundColor' => 'rgb(0, 192, 255)',
+                'backgroundColor' => "rgba(0, 133, 255, 1)",
+                'borderColor' => "rgba(140, 15, 133, 1)",
+                'pointBackgroundColor' => "rgba(140, 15, 133, 1)",
+                'pointBorderColor' => "#fff",
+                'pointHoverBackgroundColor' => "#fff",
+                'pointHoverBorderColor' => "rgba(140, 15, 133, 1)",
+                'data' => $array,
+                'flex' => '2',
+                'categoryPercentage' => 0.2,
+                'barPercentage' => 0.4
+            ],
+        ]
+    ]
+]);
+?>
 

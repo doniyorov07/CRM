@@ -12,6 +12,11 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        'reCaptcha3' => [
+            'class'      => 'kekaadrenalin\recaptcha3\ReCaptcha',
+            'site_key'   => 'site_key_###',
+            'secret_key' => 'secret_key_###',
+        ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
             'baseUrl' => '/',

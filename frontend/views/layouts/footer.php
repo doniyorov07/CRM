@@ -3,18 +3,13 @@
 use yii\helpers\Url;
 ?>
 <footer id="footer">
-
     <div class="footer-top">
-
         <div class="container">
             <div class="nav justify-content-center">
-                <form action="" method="post" style="width: 70%; position: relative;">
-                    <div style="padding-bottom: 20px" class="text-center">
-                        <a href="<?= Url::to('site/demo')?>"> <button  type="button" class="btn btn-warning text-center">Demo olish</button></a>
+                <div class="col-md-6 form-group">
+                    <input type="email" name="name" class="form-control" id="name" placeholder="Emailingiz" required>
                 </div>
-                </form>
             </div>
-
             <ul class="nav justify-content-center">
                 <li class="nav-item">
                     <a target="_blank" href="https://www.facebook.com/doniyorov.uz" class="facebook nav-link"><i class="bx bxl-facebook"></i></a>

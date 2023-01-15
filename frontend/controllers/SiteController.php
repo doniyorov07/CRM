@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use app\models\Demo;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -15,9 +16,11 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\View;
 
 /**
  * Site controller
+ * @var $form View
  */
 class SiteController extends Controller
 {
@@ -79,7 +82,23 @@ class SiteController extends Controller
     }
     public function actionDemo()
     {
-        return $this->render('demo');
+        $model = new Demo();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                if ($model->sendEmail(Yii::$app->params['adminEmail'])){
+                    Yii::$app->session->setFlash('success', 'Ma\'lumot yuborildi!');
+                }else{
+                    Yii::$app->session->setFlash('danger', 'Ma\'lumot yuborilmadi!');
+                }
+                return $this->redirect(['/']);
+            }
+        }else {
+            $model->loadDefaultValues();
+        }
+        return $this->render('demo', [
+            'model'=> $model,
+        ]);
     }
 
     /**
@@ -260,4 +279,5 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+
 }

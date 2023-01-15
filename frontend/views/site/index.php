@@ -1,8 +1,13 @@
 <?php
 use yii\helpers\Url;
 /** @var yii\web\View $this */
+use dominus77\sweetalert2\Alert;
 
 $this->title = 'My Yii Application';
+
+?>
+<?php
+echo \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
 ?>
 <section id="hero" class="d-flex align-items-center justify-content-center">
     <div class="container position-relative">
@@ -83,7 +88,7 @@ $this->title = 'My Yii Application';
                         <p>O'quv markazingizni dunyoning xohlagan nuqtasidan boshqaring</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 d-flex text-center mt-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class=" col-lg-4 col-md-6 d-flex text-center mt-4" data-aos="zoom-in" data-aos-delay="100">
                     <div class="icon-box iconbox-yellow">
                         <div class="icon">
                             <i class="bi bi-graph-up-arrow"></i>
@@ -199,8 +204,11 @@ $this->title = 'My Yii Application';
         <div class="container">
 
             <div class="section-title">
-                <h2>Frequently Asked Questions</h2>
-                <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                <h2>NurCRM imkoniyatlari</h2>
+<p>
+    NurCRM sizga o'quv markazingizni boshqarish tizimini taklif etadi.
+    NurCRM internetda joylashtirilgan va unda ishlashingiz uchun ixtiyoriy qurulmadan foydalansangiz bo'ladi.
+</p>
             </div>
 
             <div class="faq-list">

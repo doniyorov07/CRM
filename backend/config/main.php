@@ -40,7 +40,7 @@ return [
     ],
         'request' => [
             'csrfParam' => '_csrf-backend',
-            'baseUrl' => '/admin',
+            'baseUrl' => '/admincrm',
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -66,7 +66,7 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-             'baseUrl' => '/admin',
+             'baseUrl' => '/admincrm',
             'rules' => [
             ],
         ],
