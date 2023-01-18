@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\LoginForm;
+use common\models\Payments;
 use common\models\Student;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResendVerificationEmailForm;
@@ -76,8 +77,9 @@ class SiteController extends Controller
         $worker = Worker::find()->count('id');
         $group = Group::find()->count('id');
 
-
-        $model = Student::find()->select('yosh')->all();
+        $today = date("Y-m-d");
+        $model = Student::find()->all();
+        $payment = Payments::find()->all();
 
 //        echo "<pre>";
 //        var_dump($model);
@@ -90,6 +92,7 @@ class SiteController extends Controller
             'worker' => $worker,
             'group' => $group,
             'model' => $model,
+            'payment' => $payment,
         ]);
     }
 

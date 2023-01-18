@@ -165,7 +165,10 @@ $this->title = "Talaba haqida axborot";
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="settings">
-                                    <table class="table table-striped">
+                                    <div class="d-flex justify-content-end">
+                                        <button onclick="ExportToExcel('xlsx')"><i class="fas fa-file-excel"></i></button>
+                                    </div>
+                                    <table id="example" class="table table-striped">
                                         <thead>
                                         <tr>
                                             <th scope="col">Miqdori</th>
@@ -222,3 +225,13 @@ $this->title = "Talaba haqida axborot";
         </div>
     </section>
 </div>
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script>
+    function ExportToExcel(type, fn, dl) {
+        var elt = document.getElementById('example');
+        var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+        return dl ?
+            XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+            XLSX.writeFile(wb, fn || ('payment.' + (type || 'xlsx')));
+    }
+</script>

@@ -50,6 +50,8 @@ class Salary extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Payments::className(), ['id' => 'group_id']);
     }
+
+
     public function behaviors()
     {
         return [

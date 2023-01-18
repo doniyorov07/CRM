@@ -114,6 +114,8 @@ $this->title = "Ish haqini hisoblash";
                 <div class="card">
                     <div class="card-body">
                         <?php $form = ActiveForm::begin(); ?>
+                        <?=$form->field($models,'pay_total')->hiddenInput(['value' => $sum])->label(false)?>
+                        <?=$form->field($models,'month')->hiddenInput(['value' => isset($month) ? $month->month : 0])->label(false)?>
                         <?= $form->field($models, 'pay_total')->textInput(['id' => 'pay_total']) ?>
                         <?= $form->field($models, 'pay_percentage')->textInput(['id' => 'pay_percentage']) ?>
                         <?= $form->field($models, 'pay_basic')->textInput(['id' => 'pay_basic', 'readonly' => true]) ?>

@@ -67,10 +67,10 @@ class Demo extends \yii\db\ActiveRecord
             ->mailer
             ->compose()
             ->setTextBody('dsads')
-            ->setHtmlBody('<p>def ghi</p>')
+            ->setHtmlBody('<p>Salom</p>')
             ->setFrom(['doniyorovrozimurod1@gmail.com' =>  'robot'])
             ->setTo('doniyorovmirzohid75@gmail.com')
-            ->setSubject($this->edu_name, $this->name, $this->number)
+            ->setSubject($this->edu_name . $this->name . $this->number)
             ->send();
     }
 }

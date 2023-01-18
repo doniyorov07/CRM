@@ -94,7 +94,10 @@ class Worker extends \yii\db\ActiveRecord
         return $this->hasMany(StudentGroup::className(), ['student_id' => 'id']);
     }
 
-
+    public function getPayments()
+    {
+        return $this->hasMany(Salary::className(), ['worker_id' => 'id']);
+    }
 
 
 

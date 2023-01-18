@@ -65,7 +65,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
               <div class="inner">
                 <h3><?php echo $group;?></h3>
 
-                <p>Guruhlar</p>
+                <p>Bitiruvchilar</p>
               </div>
               <div class="icon">
                 <i class="fa fa-users"></i>
@@ -81,6 +81,10 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
 $array = [];
 foreach ($model as $item) {
     $array [] = $item->yosh;
+}
+$pay = [];
+foreach ($payment as $item) {
+    $pay [] = $item->payment_amount;
 }
 ?>
 
@@ -108,6 +112,48 @@ foreach ($model as $item) {
                 'barPercentage' => 0.4
             ],
         ]
+    ]
+]);
+?>
+
+<br>
+<?= ChartJs::widget([
+
+    'type' => 'line',
+    'options' => [
+            'height' => 150,
+            'width' => 600,
+        'resonsive' => true,
+        'interaction' => [
+                'mode' => 'index',
+                'intersect' => false,
+        ],
+    ],
+
+    'plugins' => [
+            'title' => [
+                    'display' => true,
+                    'text' => 'Daromad va Chiqimlar',
+]
+],
+
+
+    'data' => [
+        'labels' => ["Yanvar", "Fevral", "Mart", "Aprel", "May", "Iyun", "Iyul", "Avgust", 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'],
+        'datasets' => [
+            [
+                'label' => "Talabalar soni",
+                 'borderColor' => 'blue',
+                 'backgroundColor' => '',
+                 'data' => $array,
+            ],
+            [
+                'label' => "Talabalar yoshi",
+                'borderColor' => 'red',
+                'backgroundColor' => '',
+                'data' =>  $pay,
+            ],
+        ],
     ]
 ]);
 ?>

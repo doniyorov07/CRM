@@ -44,12 +44,15 @@ return [
         ],
         'user' => [
             'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-             'authTimeout' => 300,
+            'enableAutoLogin' => false,
+            'authTimeout' => 600,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
         ],
         'session' => [
-            'name' => 'advanced-backend',
+            'class' => 'yii\web\Session',
+            'cookieParams' => ['httponly' => true, 'lifetime' => 3600 * 4],
+            'timeout' => 3600*4, //session expire
+            'useCookies' => true,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

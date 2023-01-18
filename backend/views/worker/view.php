@@ -149,70 +149,82 @@ $this->title = "Xodim haqida axborot";
                 </div>
             </div>
         </div>
-<div class="tab-pane" id="settings">
-    <form class="form-horizontal">
-      <div class="form-group row">
-        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-        <div class="col-sm-10">
-          <input type="email" class="form-control" id="inputName" placeholder="Name">
-      </div>
-  </div>
-  <div class="form-group row">
-    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-    <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-  </div>
-</div>
-<div class="form-group row">
-    <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputName2" placeholder="Name">
-  </div>
-</div>
-<div class="form-group row">
-    <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
-    <div class="col-sm-10">
-      <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-  </div>
-</div>
-<div class="form-group row">
-    <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-  </div>
-</div>
-<div class="form-group row">
-    <div class="offset-sm-2 col-sm-10">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-      </label>
-  </div>
-</div>
-</div>
-<div class="form-group row">
-    <div class="offset-sm-2 col-sm-10">
-      <button type="submit" class="btn btn-danger">Submit</button>
-  </div>
-</div>
-</form>
-</div>
+
+        <div class="tab-pane" id="settings">
+            <div class="d-flex justify-content-end">
+                <button onclick="ExportToExcel('xlsx')"><i class="fas fa-file-excel"></i></button>
+            </div>
+            <table id="example" class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Jami</th>
+                    <th scope="col">Oylik</th>
+                    <th scope="col">Foiz </th>
+                    <th scope="col">Bonus</th>
+                    <th scope="col">Ajratilgan</th>
+                    <th scope="col">Oyi</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+            <?php foreach ($model->payments as $item):?>
+                    <tr>
+                        <td>
+                            <span class="badge badge-success">
+                            <?=$item->pay_total ? $item->pay_total : '0'?>
+                            </span>
+                            <br>
+                        </td>
+                        <td>
+                            <span class="badge badge-danger">
+                             <?=$item->pay_basic ? $item->pay_basic : '0'?>
+                            </span>
+                            <br>
+                        </td>
+                        <td>
+                            <span class="badge badge-warning">
+                             <?=$item->pay_percentage ? $item->pay_percentage : '0'?> %
+                            </span>
+                            <br>
+                        </td>
+                        <td>
+                            <?=$item->pay_bonus ? $item->pay_bonus : '0'?>
+                            <br>
+                        </td>
+                        <td>
+                            <?=$item->pay_separate ? $item->pay_separate : '0'?>
+                            <br>
+                        </td>
+                        <td>
+                            <?=$item->month ? $item->month : '0'?>
+                            <br>
+                        </td>
+                        <td>
+
+                            <br>
+                        </td>
+                    </tr>
+                <?php endforeach;?>
+                </tbody>
+            </table>
+        </div>
 
 
-<!-- /.tab-pane -->
-</div>
-<!-- /.tab-content -->
 </div>
 </div>
-<!-- /.card -->
 </div>
-<!-- /.col -->
 </div>
-<!-- /.row -->
-</div><!-- /.container-fluid -->
+</div>
+</div>
 </section>
-
-
-
-
 </div>
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script>
+    function ExportToExcel(type, fn, dl) {
+        var elt = document.getElementById('example');
+        var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+        return dl ?
+            XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+            XLSX.writeFile(wb, fn || ('salary.' + (type || 'xlsx')));
+    }
+</script>

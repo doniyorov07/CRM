@@ -60,6 +60,13 @@ use yii\helpers\Url;
                         ]
                     ],
                     [
+                        'label' => 'Chiqimlar',
+                        'icon' => 'fas fa-money-check-alt',
+                        'items' => [
+                            ['label' => 'Chiqim qo\'shish',  'icon' => ' ', 'url' => ['/cost']],
+                        ]
+                    ],
+                    [
                         'label' => 'Kadrlar b\'limi',
                         'icon' => 'fas fa-chalkboard-teacher',
                         'items' => [

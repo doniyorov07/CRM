@@ -47,8 +47,10 @@ class SalaryController extends Controller
     public function actionIndex()
     {
         $searchModel = new PaymentSearch();
+        $models = new Salary();
 
-        if ($searchModel->load(Yii::$app->request->post()) && $searchModel->validate()) {
+
+        if (($searchModel->load(Yii::$app->request->post()) && $searchModel->validate()) || ($models->load($this->request->post()) && $models->save())) {
 
             $worker = Worker::find()
                 ->andWhere(['id' => $searchModel->worker_id])
@@ -81,16 +83,8 @@ class SalaryController extends Controller
 
             $models = new Salary([
                 'pay_total' => $sum,
-                'month' => $month->month,
             ]);
 
-            if ($models->load($this->request->post()) && $models->save()) {
-                echo "<pre>";
-                print_r($models);
-                echo "</pre>";
-
-                return $this->redirect(['index']);
-            }
 
             return $this->render('search_result', [
                 'model' => $model,
