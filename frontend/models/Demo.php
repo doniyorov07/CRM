@@ -61,7 +61,7 @@ class Demo extends \yii\db\ActiveRecord
         return new DemoQuery(get_called_class());
     }
 
-    public function sendEmail($email)
+    public function sendEmail()
     {
         return Yii::$app
             ->mailer

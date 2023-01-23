@@ -40,7 +40,7 @@ echo \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
                                 <?= $form->field($model, 'cost_price')->textInput()?>
                             </div>
                             <div class="form-group">
-                                <?= $form->field($model, 'descreption')->textInput()?>
+                                <?= $form->field($model, 'cost_reason')->textInput()?>
                             </div>
                         </div>
                         <div class="card-footer">
@@ -74,7 +74,7 @@ echo \dominus77\sweetalert2\Alert::widget(['useSessionFlash' => true]);
                                     <td><?=$item['cost_name']?></td>
                                     <td><?=$item['date']?></td>
                                     <td><?=$item['cost_price']?></td>
-                                    <td><?=$item['descreption']?></td>
+                                    <td><?=$item['cost_reason']?></td>
                                     <td>
                                         <?= Html::a('<i class="fa fa-trash" aria-hidden="true"></i>', ['delete', 'id' => $item->id], [
                                             'class' => 'btn btn-danger',

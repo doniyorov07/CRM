@@ -52,7 +52,7 @@ use yii\helpers\Url;
                     ],
                     [
                         'label' => 'To\'lovlar',
-                        'icon' => 'fas fa-money-check-alt',
+                        'icon' => 'fa-solid fa-filter',
                         'items' => [
                              ['label' => 'To\'lov',  'icon' => ' ', 'url' => ['/payments']],
                              ['label' => 'To\'lovlar tarixi',  'icon' => ' ', 'url' => ['/payhistory']],

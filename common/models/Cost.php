@@ -33,8 +33,7 @@ class Cost extends \yii\db\ActiveRecord
             [['date'], 'safe'],
             [['cost_price'], 'integer'],
             [['cost_name', 'cost_reason'], 'string', 'max' => 255],
-            [['descreption'], 'string', 'max' => 500],
-            [['date', 'cost_price', 'cost_name', 'cost_reason', 'descreption'], 'required']
+            [['date', 'cost_price', 'cost_name', 'cost_reason'], 'required']
         ];
     }
 
@@ -49,7 +48,6 @@ class Cost extends \yii\db\ActiveRecord
             'date' => 'Sana',
             'cost_reason' => 'Chiqim sababi',
             'cost_price' => 'Narxi *',
-            'descreption' => 'Tasnif',
         ];
     }
 }

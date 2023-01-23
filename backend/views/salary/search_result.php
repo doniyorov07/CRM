@@ -124,7 +124,7 @@ $this->title = "Ish haqini hisoblash";
                         <?php ActiveForm::end(); ?>
                     </div>
                     <div style="padding-bottom: 10px" class="align-self-end">
-                        <?= Html::submitButton('Saqlash', ['class' => 'btn btn-primary']) ?>
+                        <?= Html::submitButton('Hisoblash', ['class' => 'btn btn-primary']) ?>
                     </div>
                 </div>
             </div>

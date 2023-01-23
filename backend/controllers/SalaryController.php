@@ -50,8 +50,11 @@ class SalaryController extends Controller
         $models = new Salary();
 
 
-        if (($searchModel->load(Yii::$app->request->post()) && $searchModel->validate()) || ($models->load($this->request->post()) && $models->save())) {
+        if (($searchModel->load(Yii::$app->request->post()) && $searchModel->validate())) {
 
+            if (($models->load($this->request->post()) && $models->save())){
+                return $this->render('site');
+            }
             $worker = Worker::find()
                 ->andWhere(['id' => $searchModel->worker_id])
                 ->one();

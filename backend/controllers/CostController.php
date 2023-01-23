@@ -30,7 +30,7 @@ class CostController extends Controller
                         'roles' => ['admin'],
                     ],
                     [
-                        'actions' => ['logout', 'index', 'create', 'delete'],
+                        'actions' => ['logout', 'index', 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['superadmin'],
                     ],
@@ -52,11 +52,12 @@ class CostController extends Controller
      */
     public function actionIndex()
     {
-        $model = new Cost();
         $query = Cost::find()->all();
-        if ($model->load($this->request->post()) && $model->save()) {
-               Yii::$app->session->setFlash('success', 'Chiqim qo\'shildi!');
-               return $this->redirect('index');
+        $model = new Cost();
+        if ($model->load($this->request->post()) && $model->validate() ) {
+              $model->save();
+              Yii::$app->session->setFlash('success', 'Chiqim qo\'shildi!');
+                return $this->redirect(['cost/index']);
             }else{
             $model->loadDefaultValues();
         }
@@ -69,11 +70,9 @@ class CostController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);

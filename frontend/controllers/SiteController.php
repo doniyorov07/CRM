@@ -86,7 +86,7 @@ class SiteController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                if ($model->sendEmail(Yii::$app->params['adminEmail'])){
+                if ($model->sendEmail()){
                     Yii::$app->session->setFlash('success', 'Ma\'lumot yuborildi!');
                 }else{
                     Yii::$app->session->setFlash('danger', 'Ma\'lumot yuborilmadi!');

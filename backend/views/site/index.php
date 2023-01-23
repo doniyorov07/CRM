@@ -2,6 +2,7 @@
 
 use dosamigos\chartjs\ChartJs;
 $this->title = 'Admin Panel';
+
 $this->params['breadcrumbs'] = [['label' => $this->title]];
 /**
  *@var $model \yii\web\Controller
@@ -9,6 +10,9 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
  *@var $worker \yii\web\Controller
  *@var $group \yii\web\Controller
  */
+?>
+<?php
+echo \common\widgets\Alert::widget();
 ?>
  <section class="content">
       <div class="container-fluid">

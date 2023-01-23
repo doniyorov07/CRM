@@ -2,8 +2,8 @@
 use yii\helpers\Html;
 ?>
 <div class="d-flex justify-content-center">
-<div class="card col-5">
-    <div class="card-header text-center">
+<div class="card col-6 text-center">
+    <div class="card-header ">
         <a href="../../index2.html" class="h1"><b>CRM</b></a>
     </div>
     <div class="card-body login-card-body">
@@ -13,7 +13,7 @@ use yii\helpers\Html;
 
         <?= $form->field($model,'username', [
             'options' => ['class' => 'form-group has-feedback'],
-            'inputTemplate' => '{input}<div class="input-group-append"><div class="input-group-text"><span class="fas fa-envelope"></span></div></div>',
+            'inputTemplate' => '{input}<div class="input-group-append"></div>',
             'template' => '{beginWrapper}{input}{error}{endWrapper}',
             'wrapperOptions' => ['class' => 'input-group mb-3']
         ])
@@ -22,7 +22,7 @@ use yii\helpers\Html;
 
         <?= $form->field($model, 'password', [
             'options' => ['class' => 'form-group has-feedback'],
-            'inputTemplate' => '{input}<div class="input-group-append"><div class="input-group-text"><span class="fas fa-lock"></span></div></div>',
+            'inputTemplate' => '{input}<div class="input-group-append"></div>',
             'template' => '{beginWrapper}{input}{error}{endWrapper}',
             'wrapperOptions' => ['class' => 'input-group mb-3']
         ])
@@ -30,23 +30,16 @@ use yii\helpers\Html;
             ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]) ?>
 
         <div class="row">
-            <div class="col-8">
-                <?= $form->field($model, 'rememberMe')->checkbox([
-                    'template' => '<div class="icheck-primary">{input}{label}</div>',
-                    'labelOptions' => [
-                        'class' => ''
-                    ],
-                    'uncheck' => null
-                ]) ?>
-            </div>
-            <div class="col-4">
+
+            <div class="col-12">
                 <?= Html::submitButton('Kirish', ['class' => 'btn btn-primary btn-block']) ?>
             </div>
         </div>
 
         <?php \yii\bootstrap4\ActiveForm::end(); ?>
+        <br>
         <p class="mb-1">
-            <a href="forgot-password.html">I forgot my password</a>
+            <a href="#">Parol esdan chiqdimi</a>
         </p>
 
     </div>

@@ -13,6 +13,9 @@ return [
     'bootstrap' => ['log'],
     'language' => 'uz',
     'modules' => [
+            'backend' => [
+                'class' => 'backend\modules\test\Module',
+            ],
         'gridview' => [
             'class' => 'kartik\grid\Module',
         ],

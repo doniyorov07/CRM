@@ -106,16 +106,13 @@ class SiteController extends Controller
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
         $this->layout = 'blank';
-
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            Yii::$app->session->setFlash('success', 'Siz tizimga muvaffaqqiyati kirdingiz!');
             return $this->goBack();
         }
-
         $model->password = '';
-
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -129,7 +126,6 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 
@@ -142,10 +138,8 @@ class SiteController extends Controller
 
                 return $this->goHome();
             }
-
             Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
         }
-
         return $this->render('requestPasswordResetToken', [
             'model' => $model,
         ]);
