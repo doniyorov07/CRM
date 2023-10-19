@@ -24,6 +24,7 @@ return [
         ],
     ],
     'components' => [
+
         'assetManager' => [
             'bundles' => [
                 'yii2mod\alert\AlertAsset' => [

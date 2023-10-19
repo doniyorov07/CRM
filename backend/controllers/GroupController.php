@@ -49,8 +49,7 @@ public function actionIndex()
             Yii::$app->session->setFlash('success', 'Guruh muvaffaqqiyati yaratildi!');
         return $this->redirect(['index']);
     }
-    $model->lesson_days=explode(',',$model->lesson_days);
-
+    $model->lesson_days = $model->lesson_days ? explode(',', $model->lesson_days) : [];
         return $this->render('index', [
             'model' => $model,
             'group' => $group,

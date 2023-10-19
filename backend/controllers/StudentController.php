@@ -97,7 +97,7 @@ class StudentController extends Controller
                             Yii::$app->session->setFlash('success', 'Talaba muvaffaqqiyatli qo\'shildi!');
                               return $this->redirect(['view', 'id' => $model->id]);
                 }
-               $model->oqitish_tili=explode(',',$model->oqitish_tili);
+                $model->oqitish_tili = $model->oqitish_tili ? explode(',', $model->oqitish_tili) : [];
               return $this->render('create', [
             'model' => $model,
         ]);
